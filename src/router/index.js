@@ -24,7 +24,7 @@ const routes = [
 ];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   routes,
   scrollBehavior() {
     const scrolls = document.getElementsByClassName('layout-content-scroll');
