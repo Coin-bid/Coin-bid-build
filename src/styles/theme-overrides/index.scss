@@ -1,7 +1,37 @@
 // Define variable defaults
-$body-bg: #000;
-$body-color: #111;
+$body-bg: #fff;
+$body-color: #333;
+
+
+$theme-colors: (
+  "primary": #00D750,
+  "danger": #ff4136
+);
 
 // Then import Bootstrap an BootstrapVue SCSS files (order is important)
 @import '~bootstrap';
 @import '~bootstrap-vue';
+
+
+#app {
+  background: url(~@/assets/img/bottom-bg@2x.png) center 100% / auto 1400px no-repeat;
+}
+.container {
+  max-width: 1056px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+// @media (max-width: 992px) {
+//   // .container-lg, .container-md, .container-sm, .container {
+//   //   max-width: 960px;
+//   // }
+// }
+
+
+@media (min-width: 1200px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container {
+      max-width: 1230px;
+  }
+}

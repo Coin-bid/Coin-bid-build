@@ -1,29 +1,47 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home.vue';
+import Layout from '@/layout';
+
+// import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home,
+    // name: 'Home',
+    component: Layout,
+    // redirect: '/home',
+    children: [
+      {
+        path: '/',
+        name: 'Home',
+        component: () => import('@/views/Home'),
+      },
+    ],
   },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  },
+  // ...login,
 ];
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
   routes,
+  scrollBehavior() {
+    const scrolls = document.getElementsByClassName('layout-content-scroll');
+    if (scrolls.length > 0) scrolls[0].scrollTop = 0;
+  },
 });
+
+// router.beforeEach((to, from, next) => {
+//   // eslint-disable-next-line
+//   if (to.meta.excludeLogin || __g_store__.state.user.isLogin) {
+//     next();
+//   } else {
+//     next({
+//       path: '/client/login',
+//       replace: true,
+//     });
+//   }
+// });
 
 export default router;

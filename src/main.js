@@ -13,8 +13,17 @@ Vue.use(IconsPlugin);
 
 Vue.config.productionTip = false;
 
-new Vue({
+window.__g_store__ = store;
+window.__g_router__ = router;
+
+// eslint-disable-next-line no-underscore-dangle
+window.__g_root__ = new Vue({
   router,
   store,
   render: (h) => h(App),
 }).$mount('#app');
+
+// __g_root__.$bvToast.toast(`提示`, {
+//   title: 'BootstrapVue Toast',
+//   autoHideDelay: 5000,
+// })
