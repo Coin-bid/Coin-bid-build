@@ -12,7 +12,10 @@
         <img class="logo" src="@/assets/img/logo@2x.png" alt="">
       </b-navbar-brand>
 
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+      <b-navbar-toggle
+        @click="onToggleClick"
+        target="nav-collapse"
+      ></b-navbar-toggle>
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
@@ -63,6 +66,7 @@ export default {
   data() {
     return {
       atTop: true,
+      expand: false,
     };
   },
   mounted() {
@@ -76,7 +80,9 @@ export default {
   },
 
   methods: {
-
+    onToggleClick() {
+      this.expand = !this.expand;
+    }
   },
 };
 </script>
@@ -129,6 +135,18 @@ export default {
   // background-color: transparent !important;
   &.bg-light {
     background-color: #fff !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar {
+    background-color: #fff !important;
+  }
+
+  .navbar-nav {
+    .nav-item {
+      margin-right: 0;
+    }
   }
 }
 </style>

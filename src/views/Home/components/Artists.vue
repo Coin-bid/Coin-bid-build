@@ -46,7 +46,7 @@ export default {
   font-weight: bold;
   color: #000000;
   line-height: 45px;
-  width: 447px;
+  // width: 447px;
   background: url(~@/assets/img/quota_bg@2x.png) left top / 155px auto no-repeat;
 }
 
@@ -82,7 +82,12 @@ export default {
 .left-btn {
   margin-right: 16px;
 }
+@media (max-width: 992px) {
+  .list {
 
-.op-bar {
+    .card {
+      margin-bottom: 24px;
+    }
+  }
 }
 </style>

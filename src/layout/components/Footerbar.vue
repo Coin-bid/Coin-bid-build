@@ -2,7 +2,7 @@
   <div class="footer">
     <b-container fluid="lg">
       <b-row class="contact-bar" align-h="between" align-v="top">
-        <b-col cols="6" lg="2">
+        <b-col class="contact-col" cols="3" lg="2">
           <h5>COMPANY</h5>
           <a href="">About Us</a>
           <br>
@@ -12,7 +12,7 @@
           <br>
           <a href="">Contact</a>
         </b-col>
-        <b-col cols="6" lg="2">
+        <b-col class="contact-col"  cols="3" lg="2">
           <h5>COMPANY</h5>
           <a href="">Features</a>
           <br>
@@ -22,7 +22,7 @@
           <br>
           <a href="">Login</a>
         </b-col>
-        <b-col cols="6" lg="2">
+        <b-col class="contact-col"  cols="3" lg="2">
           <h5>COMPANY</h5>
           <a href="">Privacy</a>
           <br>
@@ -62,6 +62,7 @@
 
 .contact-bar {
   padding-bottom: 118px;
+
   h5 {
     color: #000000;
     font-size: 16px;
@@ -132,9 +133,29 @@
 }
 
 @media (max-width: 992px) {
+
+  .footer {
+    background: url(~@/assets/img/footer-bg@2x.png) 20% 100% / auto 75px no-repeat;
+    // background-position: ;
+  }
+
   .footer-bar {
     .copy {
       text-align: left;
+    }
+  }
+
+  .contact-bar {
+
+    & .contact-col {
+      margin-bottom: 24px;
+    }
+
+    & .blog-card-container {
+      justify-content: flex-start;
+      & .blog-card {
+        width: 100%;
+      }
     }
   }
 }

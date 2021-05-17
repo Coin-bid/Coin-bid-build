@@ -66,4 +66,16 @@ export default {
     margin-top: 50px;
   }
 }
+
+
+@media (max-width: 992px) {
+  .auction-img-1 {
+    width: 100%;
+  }
+
+  .auction-img-2 {
+    width: 100%;
+  }
+}
+
 </style>

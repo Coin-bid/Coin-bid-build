@@ -59,4 +59,20 @@ h3 {
   }
   // background: url() ;
 }
+
+@media (max-width: 992px) {
+  .bg {
+    & img {
+      right: -800px
+    }
+  }
+}
+
+@media (max-width: 540px) {
+  .bg {
+    & img {
+      right: -1100px
+    }
+  }
+}
 </style>

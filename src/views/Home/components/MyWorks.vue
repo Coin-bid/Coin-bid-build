@@ -1,7 +1,7 @@
 <template>
   <b-container fluid="lg" class="my-works">
-    <b-row class="list" :no-gutters="true">
-      <b-col class="first-col">
+    <div class="list" :no-gutters="true">
+      <div class="first-col" >
         <div class="first-card">
           I own the works
         </div>
@@ -9,9 +9,8 @@
           <img src="@/assets/img/my-work-3@2x.png" alt="">
           <div class="name">Discover super artists</div>
         </div>
-      </b-col>
-
-      <b-col class="second-col">
+      </div>
+      <div class="second-col">
         <div class="work-card">
           <img src="@/assets/img/my-work-1@2x.png" alt="">
           <div class="name">The Throne of Trump</div>
@@ -20,8 +19,8 @@
           <img src="@/assets/img/my-work-4@2x.png" alt="">
           <div class="name">Spread the Joy</div>
         </div>
-      </b-col>
-      <b-col class="last-col">
+      </div>
+      <div class="last-col">
         <div class="work-card">
           <img src="@/assets/img/my-work-2@2x.png" alt="">
           <div class="name">Where Did Macy Go?</div>
@@ -29,8 +28,8 @@
         <div class="last-card">
           <b-button variant="primary">View More</b-button>
         </div>
-      </b-col>
-    </b-row>
+      </div>
+    </div>
     </b-container>
 </template>
 
@@ -44,6 +43,10 @@ export default {
 
 .my-works {
   margin-bottom: 100px;
+}
+
+.list {
+  display: flex;
 }
 
 .first-card,
@@ -97,7 +100,6 @@ export default {
       width: 340px;
     }
   }
-
 }
 
 .last-col {
@@ -122,4 +124,32 @@ export default {
   }
 
 }
+
+@media (max-width: 992px) {
+  .list {
+    display: block;
+  }
+
+  .first-col,
+  .second-col,
+  .last-col {
+      width: 100%;
+
+    margin-right: 0;
+    & .first-card,
+    & .last-card,
+    & .work-card {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: 24px;
+
+      & img {
+        width: 100%
+      }
+    }
+  }
+
+}
+
 </style>

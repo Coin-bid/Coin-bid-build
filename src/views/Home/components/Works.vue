@@ -7,7 +7,7 @@
       <b-col
       v-for="(item, idx) in list"
       :key="idx">
-      <WorkCard span="4"  :img="item.img"/>
+      <WorkCard class="card" span="4"  :img="item.img"/>
       </b-col>
     </b-row>
     <div class="more-wrapper">
@@ -43,7 +43,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .works {
   padding-top: 150px;
   padding-bottom: 198px;
@@ -61,5 +61,13 @@ h2 {
 
 .more-wrapper {
   text-align: center;
+}
+
+@media (max-width: 992px) {
+  .list {
+    .card {
+      margin-bottom: 24px;
+    }
+  }
 }
 </style>
