@@ -1,8 +1,8 @@
 <template>
   <div class="footer">
     <b-container fluid="lg">
-      <b-row class="contact-bar" align-h="between" align-v="top">
-        <b-col class="contact-col" cols="3" lg="2">
+      <b-row class="contact-bar" >
+        <b-col class="contact-col" cols="4" lg="2">
           <h5>COMPANY</h5>
           <a href="">About Us</a>
           <br>
@@ -12,7 +12,7 @@
           <br>
           <a href="">Contact</a>
         </b-col>
-        <b-col class="contact-col"  cols="3" lg="2">
+        <b-col class="contact-col"  cols="4" lg="2">
           <h5>COMPANY</h5>
           <a href="">Features</a>
           <br>
@@ -22,7 +22,7 @@
           <br>
           <a href="">Login</a>
         </b-col>
-        <b-col class="contact-col"  cols="3" lg="2">
+        <b-col class="contact-col"  cols="4" lg="2">
           <h5>COMPANY</h5>
           <a href="">Privacy</a>
           <br>
@@ -30,7 +30,7 @@
           <br>
           <a href="">Security</a>
         </b-col>
-        <b-col cols="12" lg="4" class="blog-card-container">
+        <b-col cols="12"  lg="4" class="blog-card-container  ml-auto">
           <div class="blog-card">
             <h4 class="title">Blog Coin Bid</h4>
             <div class="label">Write email to us in</div>
@@ -62,7 +62,7 @@
 
 .contact-bar {
   padding-bottom: 118px;
-
+  // width: 100%;
   h5 {
     color: #000000;
     font-size: 16px;

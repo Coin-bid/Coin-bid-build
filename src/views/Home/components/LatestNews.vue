@@ -1,7 +1,7 @@
 <template>
   <b-container class="latest-news" fluid="lg">
-    <b-row align-v="center" align-h="center">
-      <b-col>
+    <b-row >
+      <b-col class="col">
         <div class="sign-up-card">
           <h2>Sign Up For The Latest News From Coin Bid</h2>
           <div class="input-wrapper">
@@ -21,8 +21,15 @@
 .latest-news {
   margin-bottom: 138px;
 }
+
+.col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .sign-up-card {
   max-width: 1056px;
+  width: 100%;
   // height: 300px;
   background: #00D750;
   box-shadow: 0px 13px 20px 0px rgba(0, 215, 80, 0.41);
@@ -54,11 +61,12 @@
     align-items: center;
     padding: 5px;
     margin-bottom: 56px;
-margin-left: auto;
+    margin-left: auto;
     margin-right: auto;
 
     & input {
       height: 70px;
+      width: 70%;
       flex-grow: 1;
       flex-shrink: 1;
       border: 0;

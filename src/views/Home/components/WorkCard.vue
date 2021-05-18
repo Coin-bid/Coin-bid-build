@@ -35,7 +35,8 @@ export default {
   padding: 10px 10px 0;
 
   .work-pic {
-    width: 360px;
+    width: 100%;
+    // width: 360px;
     height: 260px;
   }
 
@@ -74,7 +75,7 @@ export default {
     background: #00D750;
 
     .info  {
-       .row-1,
+      .row-1,
       .row-2,
       .row-3 {
         color: #fff;
@@ -82,5 +83,23 @@ export default {
     }
 
   }
+}
+
+@media (max-width: 992px) {
+
+}
+
+@media (max-width: 576px) {
+  .work-card {
+    width: 100%;
+    // height: 410px;
+    // background: #FFFFFF;
+    // box-shadow: 0px 3px 30px 0px rgba(205, 204, 211, 0.5);
+    // padding: 10px 10px 0;
+
+    .work-pic {
+      // height: 260px;
+    }
+}
 }
 </style>
