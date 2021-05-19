@@ -6,10 +6,20 @@
       </h2>
     </b-container>
     <div class="list">
-      <ArtistCard class="card"/>
-      <ArtistCard class="card"/>
-      <ArtistCard class="card"/>
-      <ArtistCard class="card"/>
+      <ArtistCard
+        class="card"
+        name="Alain Cartwright"
+        position="CEO"
+        intro="Graduated from Cambridge with an MBA degree from Stanford. Has been worked in Deloitte, Accenture, and IBM with different technical and managing roles."
+      />
+      <ArtistCard
+        class="card"
+        name="Matthew Chapman"
+        position="COO"
+        intro="Holds a bachelor's degree from Imperial College London and worked at IBM as a Blochcain Architect. Has remarkable leadership experience managing multiple cross-functional teams in the IT industry, especially in the Blockchain field."
+      />
+      <!-- <ArtistCard class="card"/>
+      <ArtistCard class="card"/> -->
     </div>
     <b-container fluid="lg" class="op-bar">
       <b-button class="left-btn" variant="primary">
@@ -56,7 +66,7 @@ export default {
   padding: 56px 0;
   @include hideScrollBar;
 
-  .card {
+  ::v-deep .card {
     display: inline-block;
     margin: 0 20px;
   }

@@ -7,16 +7,16 @@
           <img class="auction-img-1" src="@/assets/img/auction-1@2x.png" alt="">
         </b-col>
         <b-col span="6" class="auction-info">
-          <h3>Auction Cover</h3>
-          <p>We are the first and the only crowdfunding platform enabling you to help enabling you to help finance our first and the only crowdfunding platformenabling you to help finance .</p>
+          <h3>Covers In Auction</h3>
+          <p>Artists obtain the right to create NFT through bidding, thereby obtaining the opportunity to display the art works and the right to hold auction proceeds.</p>
           <b-button class="btn" variant="primary" size="lg">View More</b-button>
         </b-col>
       </b-row>
 
       <b-row align-v="center">
         <b-col span="6" class="auction-info">
-           <h3>Auction of Art Works</h3>
-          <p>We are the first and the only crowdfunding platform enabling you to help enabling you to help finance our first and the only crowdfunding platformenabling you to help finance .</p>
+           <h3>Creations In Auction</h3>
+          <p>Community collectors obtain NFTs through bidding, enjoy the income from NFT mining, and can also transfer their NFTs at any time.</p>
           <b-button  class="btn" variant="primary" size="lg">View More</b-button>
         </b-col>
         <b-col span="6">

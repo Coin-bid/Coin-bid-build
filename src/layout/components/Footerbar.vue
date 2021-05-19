@@ -13,14 +13,17 @@
           <a href="">Contact</a>
         </b-col>
         <b-col class="contact-col"  cols="4" lg="2">
-          <h5>COMPANY</h5>
-          <a href="">Features</a>
+          <h5>MEDIA LINK</h5>
+          <a href="https://twitter.com/CoinBid1">Twitter</a>
           <br>
-          <a href="">How it works</a>
+          <a href="https://www.facebook.com/CoinBidNFT.io">Facebook</a>
           <br>
-          <a href="">Pricing</a>
+          <a href="https://youtube.com/channel/UCixE0PUHuHfEPTCTsoYO1Fw">Youtube</a>
           <br>
-          <a href="">Login</a>
+          <a href="https://t.me/Coinbidnft ">Telegram</a>
+          <!--  medium.com https://medium.com/@CoinBid1 -->
+           <br>
+          <a href="https://discord.gg/RdNrCRcKdm">Discord</a>
         </b-col>
         <b-col class="contact-col"  cols="4" lg="2">
           <h5>COMPANY</h5>
@@ -34,10 +37,10 @@
           <div class="blog-card">
             <h4 class="title">Blog Coin Bid</h4>
             <div class="label">Write email to us in</div>
-            <div class="email">info@zoufarm.co</div>
+            <div class="email">contact@coin-bid.io</div>
             <b-button class="sign-btn" variant="primary" size="lg">
               <img src="@/assets/img/icon-user@2x.png" alt="">
-              Sign In</b-button>
+              Mail to us</b-button>
           </div>
         </b-col>
       </b-row>

@@ -3,7 +3,7 @@
     <div class="list" :no-gutters="true">
       <div class="first-col" >
         <div class="first-card">
-          I own the works
+          My owned creations
         </div>
         <div class="work-card">
           <img src="@/assets/img/my-work-3@2x.png" alt="">

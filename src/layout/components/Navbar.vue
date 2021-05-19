@@ -20,10 +20,10 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item :active="true" href="/">Home</b-nav-item>
-          <b-nav-item href="/product">Product</b-nav-item>
-          <b-nav-item href="/team">Team</b-nav-item>
+          <b-nav-item href="/auction">Auction</b-nav-item>
+          <b-nav-item href="/governance">Governance</b-nav-item>
           <b-nav-item href="/blog">Blog</b-nav-item>
-          <b-nav-item href="/contact">Contact</b-nav-item>
+          <b-nav-item href="/introduce">Introduce</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->

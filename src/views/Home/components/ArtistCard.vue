@@ -1,14 +1,16 @@
-<template>
-  <div class="artists-card">
+<template functional>
+  <div class="artists-card"
+    :class="data.staticClass || ''"
+  >
     <div class="avatar-wrapper">
       <img src="~@/assets/img/avatar-1@2x.png" alt="" class="avatar">
       <div class="name-wrapper">
-        <div class="name">Fernando Soler</div>
-        <div class="position">Telecommunication Engineer</div>
+        <div class="name">{{props.name}}</div>
+        <div class="position">{{props.position}} </div>
       </div>
     </div>
     <div class="intro">
-      Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam
+      {{props.intro}}
     </div>
   </div>
 </template>
@@ -49,9 +51,19 @@
     line-height: 32px;
     margin: 30px;
     // font-weight: bold;
-    white-space: normal;
+    // white-space: normal;
     color: #324148;
-    font-size: 18px
+    font-size: 18px;
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+     word-break: break-all;
+        // height: 100px;
+    // -webkit-box-orient: $orient;
+    // word-break: break-all;
   }
 }
 
