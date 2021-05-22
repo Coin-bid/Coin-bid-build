@@ -4,35 +4,37 @@
       <b-row class="contact-bar" >
         <b-col class="contact-col" cols="4" lg="2">
           <h5>COMPANY</h5>
-          <a href="">About Us</a>
+          <a target="_blank" href="">About Us</a>
           <br>
-          <a href="">Team</a>
+          <a target="_blank" href="">Team</a>
           <br>
-          <a href="">Careers</a>
+          <a target="_blank" href="">Help Center</a>
           <br>
-          <a href="">Contact</a>
+          <a target="_blank" href="">Suggestions</a>
+          <br>
+          <a target="_blank" href="">Voting</a>
         </b-col>
         <b-col class="contact-col"  cols="4" lg="2">
           <h5>MEDIA LINK</h5>
-          <a href="https://twitter.com/CoinBid1">Twitter</a>
+          <a target="_blank" href="https://twitter.com/CoinBid1">Twitter</a>
           <br>
-          <a href="https://www.facebook.com/CoinBidNFT.io">Facebook</a>
+          <a target="_blank" href="https://www.facebook.com/CoinBidNFT.io">Facebook</a>
           <br>
-          <a href="https://youtube.com/channel/UCixE0PUHuHfEPTCTsoYO1Fw">Youtube</a>
+          <a target="_blank" href="https://youtube.com/channel/UCixE0PUHuHfEPTCTsoYO1Fw">Youtube</a>
           <br>
-          <a href="https://t.me/Coinbidnft ">Telegram</a>
+          <a target="_blank" href="https://t.me/Coinbidnft ">Telegram</a>
           <!--  medium.com https://medium.com/@CoinBid1 -->
            <br>
-          <a href="https://discord.gg/RdNrCRcKdm">Discord</a>
+          <a target="_blank" href="https://discord.gg/RdNrCRcKdm">Discord</a>
         </b-col>
-        <b-col class="contact-col"  cols="4" lg="2">
-          <h5>COMPANY</h5>
+        <!-- <b-col class="contact-col"  cols="4" lg="2">
+          <h5>LEGAL</h5>
           <a href="">Privacy</a>
           <br>
           <a href="">Terms</a>
           <br>
           <a href="">Security</a>
-        </b-col>
+        </b-col> -->
         <b-col cols="12"  lg="4" class="blog-card-container  ml-auto">
           <div class="blog-card">
             <h4 class="title">Blog Coin Bid</h4>

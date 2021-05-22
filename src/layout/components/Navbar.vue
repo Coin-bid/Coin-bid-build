@@ -22,7 +22,7 @@
           <b-nav-item :active="true" href="/">Home</b-nav-item>
           <b-nav-item href="/auction">Auction</b-nav-item>
           <b-nav-item href="/governance">Governance</b-nav-item>
-          <b-nav-item href="/blog">Blog</b-nav-item>
+          <!-- <b-nav-item href="/blog">Blog</b-nav-item> -->
           <b-nav-item href="/introduce">Introduce</b-nav-item>
         </b-navbar-nav>
 
@@ -39,6 +39,8 @@
             <b-dropdown-item href="#">RU</b-dropdown-item>
             <b-dropdown-item href="#">FA</b-dropdown-item>
           </b-nav-item-dropdown> -->
+          <b-button class="lang-switch" variant="link">English</b-button>
+
           <b-button
             size="sm"
             class="sign-btn"
@@ -46,6 +48,17 @@
           >
             <img src="@/assets/img/icon-user@2x.png" alt="">
           Sign Up</b-button>
+
+          <b-button
+            size="sm"
+            class="whitepaper-btn"
+            variant="outline-primary"
+            target="_blank"
+            href="https://gateway.pinata.cloud/ipfs/QmY7SefA5JGuy2AJC8jdhQkNt2AKmBkse5bk5cpp9Xmgk1/COIN%20BID%20English%20version.pdf"
+          >
+            <img src="@/assets/img/icon-baipishu@2x.png" alt="">
+          White Paper</b-button>
+
 
           <!-- <b-nav-item-dropdown right>
             <template v-slot:button-content>
@@ -89,7 +102,7 @@ export default {
 
 <style lang="scss" scoped>
 .logo {
-  width: 140px;
+  width: 124px;
   margin-right: 48px;
 }
 
@@ -116,20 +129,32 @@ export default {
   }
 }
 
-.sign-btn {
+.lang-switch {
+  color: #000000;
+  margin-right: 12px;
+}
+
+.sign-btn,
+.whitepaper-btn {
   height: 40px;
   padding: 0.25rem 1rem;
   font-weight: bold;
   background: #fff !important;
   color: #00D750 !important;
-  &:hover,
-  &:active {
+  line-height: 30px;
+  // &:hover,
+  // &:active {
 
-  }
+  // }
   & img {
     width: 18px;
   }
 }
+.sign-btn {
+
+  margin-right: 10px;
+}
+
 .navbar {
   padding: 40px 1rem;
   // background-color: transparent !important;
