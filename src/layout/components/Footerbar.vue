@@ -27,14 +27,14 @@
            <br>
           <a target="_blank" href="https://discord.gg/RdNrCRcKdm">Discord</a>
         </b-col>
-        <!-- <b-col class="contact-col"  cols="4" lg="2">
+        <b-col class="contact-col"  cols="4" lg="2">
           <h5>LEGAL</h5>
           <a href="">Privacy</a>
           <br>
           <a href="">Terms</a>
           <br>
           <a href="">Security</a>
-        </b-col> -->
+        </b-col>
         <b-col cols="12"  lg="4" class="blog-card-container  ml-auto">
           <div class="blog-card">
             <h4 class="title">Blog Coin Bid</h4>
