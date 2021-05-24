@@ -16,18 +16,27 @@ export default new Vuex.Store({
       paths: ['user.isLogin'],
     }),
   ],
+  modules: {
+    user,
+    enums,
+  },
   state: {
+
   },
   getters,
   mutations: {
 
   },
   actions: {
+    showComingSoon() {
+      __g_root__.$bvToast.toast('Coming soon...', {
+        title: 'Notice',
+        // toaster: 'b-toaster-top-center',
+        autoHideDelay: 5000,
+      });
+    },
   },
-  modules: {
-    user,
-    enums,
-  },
+
 });
 
 // import app from './app';

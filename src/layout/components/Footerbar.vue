@@ -59,6 +59,16 @@
   </div>
 </template>
 
+<script>
+import { mapActions } from 'vuex';
+
+export default {
+  methods: {
+    ...mapActions(['showComingSoon']),
+  },
+};
+</script>
+
 <style lang="scss" scoped>
 
 .footer {

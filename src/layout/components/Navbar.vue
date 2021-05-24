@@ -20,10 +20,10 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item :active="true" href="/">Home</b-nav-item>
-          <b-nav-item href="/auction">Auction</b-nav-item>
-          <b-nav-item href="/governance">Governance</b-nav-item>
+          <b-nav-item @click.prevent="showComingSoon" href="/auction">Auction</b-nav-item>
+          <b-nav-item @click.prevent="showComingSoon" href="/governance">Governance</b-nav-item>
           <!-- <b-nav-item href="/blog">Blog</b-nav-item> -->
-          <b-nav-item href="/introduce">Introduce</b-nav-item>
+          <b-nav-item @click.prevent="showComingSoon" href="/introduce">Introduce</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -74,6 +74,9 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
+
 export default {
 
   data() {
@@ -95,7 +98,14 @@ export default {
   methods: {
     onToggleClick() {
       this.expand = !this.expand;
-    }
+    },
+    ...mapActions(['showComingSoon'])
+    // onClick() {
+    //   __g_root__.$bvToast.toast('Coming soon...', {
+    //     title: 'Notice',
+    //     autoHideDelay: 5000,
+    //   });
+    // },
   },
 };
 </script>

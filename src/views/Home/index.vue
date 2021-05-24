@@ -2,8 +2,8 @@
   <div class="home">
     <Banner/>
     <Auction/>
-    <Works/>
     <MyWorks/>
+    <ArtWorks/>
     <Artists/>
     <LatestNews/>
   </div>
@@ -15,8 +15,8 @@ import Banner from './components/Banner.vue';
 import LatestNews from './components/LatestNews.vue';
 import Artists from './components/Artists.vue';
 import Auction from './components/Auction.vue';
+import ArtWorks from './components/ArtWorks.vue';
 import MyWorks from './components/MyWorks.vue';
-import Works from './components/Works.vue';
 
 export default {
   name: 'Home',
@@ -25,8 +25,8 @@ export default {
     Artists,
     LatestNews,
     Auction,
+    ArtWorks,
     MyWorks,
-    Works,
   },
 };
 </script>

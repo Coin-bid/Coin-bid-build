@@ -3,19 +3,20 @@
     <img class="work-pic" :src="img" alt="">
     <div class="info">
       <div class="row-1">
-        <span>CryptoGlads</span>
-        <span>Price</span>
+        <span>维也纳是美丽的城市</span>
+        <span>$ 0.05</span>
       </div>
       <div class="row-2">
-         <span>ArenaGlad#143</span>
-        <span>Ξ 0.05</span>
+        <span>日产量：568CBD</span>
+        <!-- <span>Ξ 0.05</span> -->
+        <span>an hours left</span>
       </div>
-      <div class="row-3">
+      <!-- <div class="row-3">
          <span>
            <img src="@/assets/img/icon-lock@2x.png" alt="">
          </span>
         <span>an hours left</span>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -29,7 +30,7 @@ export default {
 <style lang="scss" scoped>
 .work-card {
   width: 380px;
-  height: 410px;
+  height: 358px;
   background: #FFFFFF;
   box-shadow: 0px 3px 30px 0px rgba(205, 204, 211, 0.5);
   padding: 10px 10px 0;
@@ -41,7 +42,8 @@ export default {
   }
 
   .info {
-    padding: 25px 15px;
+    // padding: 25px 15px;
+    margin-top: 16px;
     .row-1,
     .row-2,
     .row-3 {
@@ -57,18 +59,18 @@ export default {
       color: #999999;
       font-size: 16px;
       margin-bottom: 12px;
+      color: #00D750;
     }
 
     .row-2 {
-      font-size: 18px;
-      color: #00D750;
+      font-size: 14px;
       margin-bottom: 12px;
     }
 
-    .row-3 {
-      font-size: 14px;
-      color: #999999;
-    }
+    // .row-3 {
+    //   font-size: 14px;
+    //   color: #999999;
+    // }
   }
 
   &:hover {
