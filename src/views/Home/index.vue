@@ -5,14 +5,13 @@
     <MyWorks/>
     <ArtWorks/>
     <Artists/>
-    <LatestNews/>
+    <!-- <LatestNews/> -->
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import Banner from './components/Banner.vue';
-import LatestNews from './components/LatestNews.vue';
 import Artists from './components/Artists.vue';
 import Auction from './components/Auction.vue';
 import ArtWorks from './components/ArtWorks.vue';
@@ -23,7 +22,7 @@ export default {
   components: {
     Banner,
     Artists,
-    LatestNews,
+    // LatestNews,
     Auction,
     ArtWorks,
     MyWorks,

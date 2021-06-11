@@ -5,9 +5,12 @@
 
     <b-row class="list">
       <b-col
-      v-for="(item, idx) in list"
-      :key="idx">
-      <WorkCard class="card" span="4"  :img="item.img"/>
+        v-for="(item, idx) in list"
+        :key="idx"
+        span="12"
+        lg="4"
+      >
+        <WorkCard class="card"  :img="item.img"/>
       </b-col>
     </b-row>
     <div class="more-wrapper">
@@ -49,12 +52,14 @@ export default {
   padding-bottom: 198px;
   background: url(~@/assets/img/works-bg@2x.png) center top / auto 867px no-repeat;
 }
+
 h2 {
   font-weight: bold;
   font-size: 30px;
   text-align: center;
   margin-bottom: 60px;
 }
+
 .list {
   margin-bottom: 54px
 }

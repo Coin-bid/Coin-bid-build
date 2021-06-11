@@ -1,10 +1,12 @@
 <template>
-  <div class="work-card">
-    <img class="work-pic" :src="img" alt="">
+  <div class="work-card" @click="toDetail">
+    <div class="work-pic-wrapper">
+      <img class="work-pic" :src="img" alt="">
+    </div>
     <div class="info">
       <div class="row-1">
         <span>维也纳是美丽的城市</span>
-        <span>$ 0.05</span>
+        <span class="price">$ 0.05</span>
       </div>
       <div class="row-2">
         <span>日产量：568CBD</span>
@@ -23,27 +25,39 @@
 
 <script>
 export default {
-  props: ['img'],
+  props: ['img', 'id'],
+
+  methods: {
+    toDetail() {
+      this.$router.push(`/auction/detail/${this.id}`);
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .work-card {
-  width: 380px;
-  height: 358px;
+  width: 285px;
+  height: 275px;
   background: #FFFFFF;
-  box-shadow: 0px 3px 30px 0px rgba(205, 204, 211, 0.5);
+  border-radius: 5px;
+  box-shadow: 0px 3px 20px 0px rgba(205, 204, 211, 0.5);
   padding: 10px 10px 0;
+  cursor: pointer;
 
+  .work-pic-wrapper {
+    height: 195px;
+    width: 265px;
+    flex-shrink: 0;
+  }
   .work-pic {
     width: 100%;
-    // width: 360px;
-    height: 260px;
+    height: 100%;
+    object-fit: cover;
   }
 
   .info {
-    // padding: 25px 15px;
-    margin-top: 16px;
+    margin-top: 14px;
     .row-1,
     .row-2,
     .row-3 {
@@ -56,14 +70,20 @@ export default {
     }
 
     .row-1 {
-      color: #999999;
+      color: #000000;
       font-size: 16px;
+      line-height: 16px;
       margin-bottom: 12px;
-      color: #00D750;
+
+      & .price {
+        color: #FF6600;
+      }
     }
 
     .row-2 {
+      color: #999999;
       font-size: 14px;
+      line-height: 14px;
       margin-bottom: 12px;
     }
   }
@@ -76,6 +96,10 @@ export default {
       .row-2,
       .row-3 {
         color: #fff;
+
+        & .price {
+          color: #fff;
+        }
       }
     }
 

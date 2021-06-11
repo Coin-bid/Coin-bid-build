@@ -1,5 +1,9 @@
 import Vue from 'vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import * as echarts from 'echarts';
+import VueECharts from 'vue-echarts';
+import VueCompositionAPI from '@vue/composition-api';
+
 import App from './App.vue';
 import router from './router';
 import store from './store';
@@ -10,6 +14,8 @@ import '@/styles/theme-overrides/index.scss';
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
+
+Vue.component('v-charts', VueECharts);
 
 Vue.config.productionTip = false;
 
