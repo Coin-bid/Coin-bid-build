@@ -9,19 +9,27 @@
   },
   "dependencies": {
     "@vue/composition-api": "^1.0.0-rc.11",
+    "async-validator": "^3.5.2",
     "axios": "^0.21.1",
+    "bignumber.js": "^9.0.1",
+    "bip39": "^3.0.4",
     "bootstrap": "^4.6.0",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "dayjs": "^1.10.5",
     "echarts": "^5.1.1",
+    "ethereumjs-tx": "^2.1.2",
+    "ethereumjs-util": "^7.0.10",
+    "hdkey": "^2.0.1",
     "js-cookie": "^2.2.1",
     "qs": "^6.10.1",
+    "scryptsy": "^2.1.0",
     "vue": "^2.6.11",
     "vue-echarts": "^6.0.0-rc.5",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0",
-    "vuex-persistedstate": "^4.0.0-beta.3"
+    "vuex-persistedstate": "^4.0.0-beta.3",
+    "whatwg-fetch": "^3.6.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

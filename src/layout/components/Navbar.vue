@@ -33,21 +33,28 @@
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
           </b-nav-form> -->
 
-          <!-- <b-nav-item-dropdown text="Lang" right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
-            <b-dropdown-item href="#">ES</b-dropdown-item>
-            <b-dropdown-item href="#">RU</b-dropdown-item>
-            <b-dropdown-item href="#">FA</b-dropdown-item>
-          </b-nav-item-dropdown> -->
-          <b-button class="lang-switch" variant="link">English</b-button>
-
-          <b-button
-            size="sm"
-            class="sign-btn"
-            variant="outline-primary"
-          >
-            <img src="@/assets/img/icon-user@2x.png" alt="">
-          Sign Up</b-button>
+          <b-nav-item-dropdown text="English" right>
+            <b-dropdown-item href="#">English</b-dropdown-item>
+            <b-dropdown-item href="#">Chinese</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <!-- <b-button class="lang-switch" variant="link">English</b-button> -->
+            <b-button
+              v-if="user.address"
+              class="address-btn"
+              variant="link"
+              to="/mine"
+            >
+              {{user.address | ellipsis}}
+            </b-button>
+           <b-button
+              v-else
+              size="sm"
+              class="sign-btn"
+              variant="outline-primary"
+              @click="unlock"
+            >
+              <img src="@/assets/img/icon-user@2x.png" alt="">
+            Sign Up</b-button>
 
           <b-button
             size="sm"
@@ -74,11 +81,15 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 
 export default {
-
+  filters: {
+    ellipsis(address) {
+      return address.replace(/^(.{4}).*(.{3})$/, '$1...$2');
+    }
+  },
   data() {
     return {
       atTop: true,
@@ -87,6 +98,7 @@ export default {
     };
   },
   computed: {
+    ...mapState(['user']),
     isHome() {
       return this.$route.path === '/';
     }
@@ -105,7 +117,12 @@ export default {
     onToggleClick() {
       this.expand = !this.expand;
     },
-    ...mapActions(['showComingSoon'])
+    ...mapActions(['showComingSoon']),
+
+    unlock() {
+      this.$store.dispatch('unlockByMetaMask');
+      // __g_account__.unlockByMetaMask();
+    },
     // onClick() {
     //   __g_root__.$bvToast.toast('Coming soon...', {
     //     title: 'Notice',
@@ -143,6 +160,14 @@ export default {
         color: #fff;
 
       }
+    }
+  }
+  .address-btn {
+    margin-right: 12px;
+    color: #000000;
+
+    &:hover {
+      // color: #00D750;
     }
   }
 }

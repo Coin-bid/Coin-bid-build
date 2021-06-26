@@ -1,17 +1,20 @@
+/* eslint-disable */
+/**
+ * 不同环境载入不同配置文件
+ * @todo 按需加载配置文件
+ */
 import devConfig from './config.dev';
 import testConfig from './config.test';
 import prodConfig from './config.prod';
 
-const config = {
-  storeVersion: '1.0.0',
-};
+let config = {};
 
-if (process.env.BUILD_ENV === 'development') {
-  Object.assign(config, devConfig);
-} else if (process.env.BUILD_ENV === 'test') {
-  Object.assign(config, testConfig);
+if (process.env.NODE_ENV === 'development') {
+  config = devConfig;
+} else if (process.env.NODE_ENV === 'test') {
+  config = testConfig;
 } else {
-  Object.assign(config, prodConfig);
+  config = prodConfig;
 }
 
 export default config;
