@@ -1,18 +1,17 @@
 <template>
   <div class="work-card" @click="toDetail">
     <div class="work-pic-wrapper">
-      <img class="work-pic" :src="image" alt="">
+      <img class="work-pic" :src="img" alt="">
     </div>
     <div class="info">
       <div class="row-1">
-        <span>{{name}}</span>
-        <span class="price">$ {{auction.lastPrice.div(10 ** 6)}}</span>
+        <span>维也纳是美丽的城市</span>
+        <span class="price">$ 0.05</span>
       </div>
       <div class="row-2">
-        <span>日产量：1CBD</span>
+        <span>日产量：568CBD</span>
         <!-- <span>Ξ 0.05</span> -->
-        <span>{{auction.endAt / 60}} min</span>
-        <!-- endAt -->
+        <span>an hours left</span>
       </div>
       <!-- <div class="row-3">
          <span>
@@ -25,71 +24,14 @@
 </template>
 
 <script>
-import axios from 'axios';
-import moment from 'moment';
-
-const mockNFT = {
-  name: 'Snooprematic',
-  description: 'Snooprematic is made up of basic geometric forms such as squares, circles, and rectangles (but no triangles, huh) presented in an array of colors. This explosion of geometric vocabulary, though abstract, retains its expressiveness through the subtle Snoo form that emerges through the shapes and color. By allowing the alien form to retain its shape among the shapes, the artist hints at universal truths at the heart of all alien existence. Also, pretty.',
-  image: 'https://ipfs.io/ipfs/QmXY3SAJrNBtJTQ4UyXNREcNjZm7sCyhZHzU1Z6shH2Zrt',
-};
-
 export default {
-  props: ['item'],
-
-  data() {
-    return {
-      NFTDetail: {},
-    };
-  },
-
-  computed: {
-    name() {
-      if (this.item.tokenURI) {
-        return this.NFTDetail.name;
-      }
-      return mockNFT.name;
-    },
-    image() {
-      if (this.item.tokenURI) {
-        return this.NFTDetail.image;
-      }
-      return mockNFT.image;
-    },
-    description() {
-      if (this.item.tokenURI) {
-        return this.NFTDetail.description;
-      }
-      return mockNFT.description;
-    },
-
-    auction() {
-      return this.item.auction;
-    },
-  },
-
-  created() {
-    // const { tokenURI, auction } = this.item;
-    // console.log(tokenURI, auction);
-    this.getDetail();
-  },
+  props: ['img', 'id'],
 
   methods: {
-    async getDetail() {
-      const { tokenURI, auction } = this.item;
-      if (tokenURI) {
-        const { data } = await axios({
-          method: 'get',
-          url: 'https://ipfs.io/ipfs/QmVGQ1QjvxhHKXWLwMUazXK1cXuF5V6Wc35ubQo34Q2SiF',
-        });
-        this.NFTDetail = data;
-        console.log(data);
-      }
-    },
     toDetail() {
       this.$router.push(`/auction/detail/${this.id}`);
-    },
-  },
+    }
+  }
 };
 </script>
 

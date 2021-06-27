@@ -17,20 +17,20 @@ export default {
   data() {
     return {
       menuList: [
-        // {
-        //   label: '封面图片',
-        //   path: '/auction',
-        //   icon: require('../img/icon-cover-active@2x.png'),
-        //   aIcon: require('../img/icon-cover@2x.png'),
-        //   active: this.$route.path === '/auction',
-        // },
+        {
+          label: '封面图片',
+          path: '/auction',
+          icon: require('../img/icon-cover-active@2x.png'),
+          aIcon: require('../img/icon-cover@2x.png'),
+          active: this.$route.path === '/auction',
+        },
 
         {
           label: '拍卖作品',
-          path: '/auction',
+          path: '/auction/works',
           icon: require('../img/icon-works-active@2x.png'),
           aIcon: require('../img/icon-works@2x.png'),
-          active: this.$route.path === '/auction',
+          active: this.$route.path === '/auction/works',
         },
 
           {

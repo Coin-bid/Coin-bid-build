@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <!-- <div class="condition-bar">
+    <div class="condition-bar">
       <div class="checkbox-group">
          <b-checkbox class="checkbox" v-model="checked1">我拥有的作品</b-checkbox>
         <b-checkbox  class="checkbox"  v-model="checked2">备选项</b-checkbox>
@@ -20,8 +20,8 @@
            </span>
           </b-button>
       </div>
-    </div> -->
-  <b-overlay :show="loading" rounded="sm">
+    </div>
+
    <b-row
     class="work-list-wrapper"
     :no-gutters="true"
@@ -33,12 +33,9 @@
         md="6"
         xl="4"
       >
-        <WorkCard class="work-card"
-          :item="item"
-        />
+        <WorkCard class="work-card"  :img="item.img" :id="item.id"/>
       </b-col>
     </b-row>
-    </b-overlay>
     <div class="pagination-wrapper">
       <b-pagination
         v-model="currentPage"
@@ -47,7 +44,6 @@
         :hide-goto-end-buttons="true"
         class="pagination"
         aria-controls="my-table"
-        @change="onChange"
       >
         <!-- <template #first-text>
           <span>
@@ -76,11 +72,8 @@
 </template>
 
 <script>
-import { NFTAuctionContract } from '@/eth/ethereum';
 import WorkCard from './WorkCard.vue';
 
-
-console.log(NFTAuctionContract);
 export default {
   components: {
     WorkCard,
@@ -88,42 +81,37 @@ export default {
   data() {
     return {
 
-      perPage: 12,
+      perPage: 3,
       currentPage: 1,
       rows: 10,
-
-      loading: false,
       checked1: '',
       checked2: '',
 
-      list: [],
+      list: [
+        {
+          id: 1,
+          img: require('@/assets/img/art-work-1@2x.png'),
+        },
+        {
+          id: 2,
+          img: require('@/assets/img/art-work-2@2x.png'),
+        },
+        {
+          id: 3,
+          img: require('@/assets/img/art-work-3@2x.png'),
+        },
+        {
+          id: 4,
+          img: require('@/assets/img/art-work-1@2x.png'),
+        },
+        {
+          id: 5,
+          img: require('@/assets/img/art-work-2@2x.png'),
+        },
+
+      ],
     };
   },
-
-  mounted() {
-    this.getList();
-  },
-
-  methods: {
-    async getList() {
-      this.loading = true;
-      try {
-        const res = await NFTAuctionContract.getNFTInAuction(this.perPage, this.currentPage - 1);
-        const [ list, total ] = res;
-        this.rows = total.toNumber();
-        this.list = list;
-        console.log(list)
-      } catch (error) {
-        console.error(error);
-      }
-      this.loading = false
-
-    },
-    onChange(page) {
-      this.currentPage = page;
-      this.getList();
-    }
-  }
 };
 </script>
 
