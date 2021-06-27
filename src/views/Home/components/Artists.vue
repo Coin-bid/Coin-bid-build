@@ -6,22 +6,40 @@
       </h2>
     </b-container>
     <b-container fluid="lg" class="card-content">
-      <div class="info-wrapper">
+      <div class="info-wrapper"
+        v-if="id === 1"
+      >
         <div class="img-wrapper">
           <img src="~@/assets/img/artist-pic@2x.png" alt="">
         </div>
         <div class="intro">
-          <h4 class="name">
-            Mr. Alain Cartwright
-          </h4>
+          <h4 class="name">Mr. Alain Cartwright</h4>
           <div class="desc">
-            Mr. Alain Cartwright graduated from Cambridge withan MBA degree from Stanford. Mr.Cartwright is an accomplished executive with strongdomestic and international experience in innovation, operations, P&L for product development and marketing involving both start-up and growth organizations.
-            <br>
-            Mr. Cartwright is responsible for overall technology vision,product development, and customer delivery for 100+ person marketing company servicing a large number of advertisers and publishers. Lead all aspects of architecture, software, and product development,
+          <p>Mr. Alain Cartwright graduated from Cambridge withan MBA degree from Stanford. Mr.Cartwright is an accomplished executive with strongdomestic and international experience in innovation, operations, P&L for product development and marketing involving both start-up and growth organizations.</p>
+           <p>Mr. Cartwright is responsible for overall technology vision,product development, and customer delivery for 100+ person marketing company servicing a large number of advertisers and publishers. Lead all aspects of architecture, software, and product development,
             including all make vs. business analysis, investment rationalization, and delivery schedule for high transaction applications.Review all development projects to ensure reliability, effectiveness, and ROI. Managed department of 25-30 employees with 6 direct
-            reports: 2 Directors of Development,  the Head of QA, Head of Network, Head of Desktop, and Lead Project Manager.
-            <br>
-            Mr. Cartwright has been worked in Deloitte, Accenture, and IBM with different technical and managing roles.
+            reports: 2 Directors of Development,  the Head of QA, Head of Network, Head of Desktop, and Lead Project Manager.</p>
+           <p>Mr. Cartwright has been worked in Deloitte, Accenture, and IBM with different technical and managing roles.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-wrapper"
+        v-if="id === 2"
+      >
+        <div class="img-wrapper">
+          <img src="~@/assets/img/artist-pic@2x.png" alt="">
+        </div>
+        <div class="intro">
+          <h4 class="name">Mr. Matthew Chapman</h4>
+          <div class="desc">
+          <p>Mr. Matthew Chapman has remarkable leadership experience managing multiple cross-functional teams in the IT industry,
+          especially in the Blockchain field. Mr. Matthew holds a bachelor's degree from Imperial College London and worked at IBM as a Blochcain Architect. </p>
+          <p>Mr. Matthew has in-depth knowledge of information systems technology. Immense ability to work through complex problems
+          ability to explain and receive input on technical issues. </p>
+          <p>Mr. Chapman is applauded as a skilled international technology leader, being able to direct large geographically
+          disperse teams that work together seamlessly. </p>
+          <p>Visionary with a record of achievement in building and aligning technology organizations with business objectives to achieve dramatic Results.</p>
           </div>
         </div>
       </div>
@@ -119,6 +137,10 @@ export default {
 
   & .desc {
     white-space: break-spaces;
+    p {
+      margin: 0;
+      // text-indent: 2em;
+    }
   }
 
 }
@@ -131,6 +153,9 @@ export default {
 
   .info-wrapper {
     flex-direction: column;
+    .img-wrapper {
+      margin-right: 0;
+    }
   }
 
   .card-content  {

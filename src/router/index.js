@@ -18,6 +18,29 @@ const routes = [
         name: 'Home',
         component: () => import('@/views/Home'),
       },
+      {
+        path: '/auction',
+        name: 'Auction',
+        component: () => import('@/views/Auction'),
+      },
+
+      {
+        path: '/auction/detail/:id',
+        name: 'AuctionDetail',
+        component: () => import('@/views/AuctionDetail'),
+      },
+
+      {
+        path: '/mine',
+        name: 'Mine',
+        component: () => import('@/views/Mine'),
+      },
+
+      {
+        path: '/collection/create',
+        name: 'CollectionCreate',
+        component: () => import('@/views/CollectionCreate'),
+      },
     ],
   },
   // ...login,

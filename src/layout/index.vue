@@ -5,6 +5,7 @@
         <navbar />
       </div>
       <router-view />
+      <LatestNews />
       <footerbar />
   </div>
 </template>
@@ -12,12 +13,14 @@
 <script>
 import Navbar from './components/Navbar.vue';
 import Footerbar from './components/Footerbar.vue';
+import LatestNews from '@/components/LatestNews.vue';
 
 export default {
   name: 'Layout',
   components: {
     Navbar,
     Footerbar,
+    LatestNews,
   },
   computed: {
 
@@ -61,14 +64,7 @@ export default {
   }
 
   .fixed-header {
-    height: 130px;
-    // position: fixed;
-    // top: 0;
-    // right: 0;
-    // z-index: 9;
-    // // transition: width 0.28s;
-    // height: 50px;
-    // width: 100%;
+    height: 124px;
   }
 
   .hideSidebar {

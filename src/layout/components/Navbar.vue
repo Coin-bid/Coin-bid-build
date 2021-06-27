@@ -2,7 +2,7 @@
   <b-navbar
     class="navbar"
     toggleable="lg"
-    :variant="atTop ? '' : 'light'"
+    :variant="(atTop && isHome) ? '' : 'light'"
     type="light"
     fixed="top"
   >
@@ -19,11 +19,11 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item :active="true" href="/">Home</b-nav-item>
-          <b-nav-item @click.prevent="showComingSoon" href="/auction">Auction</b-nav-item>
-          <b-nav-item @click.prevent="showComingSoon" href="/governance">Governance</b-nav-item>
+          <b-nav-item :active="$route.path === '/'"  @click="$router.push('/')">Home</b-nav-item>
+          <b-nav-item :active="$route.path.startsWith('/auction')" @click="$router.push('/auction')">Auction</b-nav-item>
+          <b-nav-item :active="$route.path.startsWith('/governance')"  @click="$router.push('/governance')">Governance</b-nav-item>
           <!-- <b-nav-item href="/blog">Blog</b-nav-item> -->
-          <b-nav-item @click.prevent="showComingSoon" href="/introduce">Introduce</b-nav-item>
+          <b-nav-item :active="$route.path.startsWith('/introduce')" @click="$router.push('/introduce')">Introduce</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -33,21 +33,28 @@
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
           </b-nav-form> -->
 
-          <!-- <b-nav-item-dropdown text="Lang" right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
-            <b-dropdown-item href="#">ES</b-dropdown-item>
-            <b-dropdown-item href="#">RU</b-dropdown-item>
-            <b-dropdown-item href="#">FA</b-dropdown-item>
-          </b-nav-item-dropdown> -->
-          <b-button class="lang-switch" variant="link">English</b-button>
-
-          <b-button
-            size="sm"
-            class="sign-btn"
-            variant="outline-primary"
-          >
-            <img src="@/assets/img/icon-user@2x.png" alt="">
-          Sign Up</b-button>
+          <b-nav-item-dropdown text="English" right>
+            <b-dropdown-item href="#">English</b-dropdown-item>
+            <b-dropdown-item href="#">Chinese</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <!-- <b-button class="lang-switch" variant="link">English</b-button> -->
+            <b-button
+              v-if="user.address"
+              class="address-btn"
+              variant="link"
+              to="/mine"
+            >
+              {{user.address | ellipsis}}
+            </b-button>
+           <b-button
+              v-else
+              size="sm"
+              class="sign-btn"
+              variant="outline-primary"
+              @click="unlock"
+            >
+              <img src="@/assets/img/icon-user@2x.png" alt="">
+            Sign Up</b-button>
 
           <b-button
             size="sm"
@@ -74,16 +81,27 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 
 
 export default {
-
+  filters: {
+    ellipsis(address) {
+      return address.replace(/^(.{4}).*(.{3})$/, '$1...$2');
+    }
+  },
   data() {
     return {
       atTop: true,
       expand: false,
+
     };
+  },
+  computed: {
+    ...mapState(['user']),
+    isHome() {
+      return this.$route.path === '/';
+    }
   },
   mounted() {
     document.addEventListener('scroll', (e) => {
@@ -99,7 +117,12 @@ export default {
     onToggleClick() {
       this.expand = !this.expand;
     },
-    ...mapActions(['showComingSoon'])
+    ...mapActions(['showComingSoon']),
+
+    unlock() {
+      this.$store.dispatch('unlockByMetaMask');
+      // __g_account__.unlockByMetaMask();
+    },
     // onClick() {
     //   __g_root__.$bvToast.toast('Coming soon...', {
     //     title: 'Notice',
@@ -126,15 +149,25 @@ export default {
       color: #000000;
       text-align: center;
       font-size: 16px;
+      // width: 76px;
+      padding: 0 12px;
+      display: inline-block;
+      height: 26px;
+      line-height: 26px;
+      border-radius: 13px;
       &.active {
         background: #00D750;
         color: #fff;
-        width: 76px;
-        height: 26px;
-        line-height: 26px;
-        border-radius: 13px;
-        padding: 0;
+
       }
+    }
+  }
+  .address-btn {
+    margin-right: 12px;
+    color: #000000;
+
+    &:hover {
+      // color: #00D750;
     }
   }
 }
@@ -168,12 +201,14 @@ export default {
 .navbar {
   padding: 40px 1rem;
   // background-color: transparent !important;
+
   &.bg-light {
     background-color: #fff !important;
+    box-shadow: 0px 8px 20px 0px rgba(153, 153, 153, 0.12);
   }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
   .navbar {
     background-color: #fff !important;
   }
@@ -181,6 +216,18 @@ export default {
   .navbar-nav {
     .nav-item {
       margin-right: 0;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-nav {
+    .nav-item {
+      padding: 8px 0;
+    }
+
+    .btn {
+      margin-top: 12px;
     }
   }
 }

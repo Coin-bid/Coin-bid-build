@@ -1,0 +1,22 @@
+export default [
+  {
+    "type":"eth_transfer",
+    "gasLimit":"0x5208"
+  },
+  {
+    "type":"token_transfer",
+    "gasLimit":"0x186a0"
+  },
+  {
+    "type":"approve",
+    "gasLimit":"0x186a0"
+  },
+  {
+    "type":"withdraw",
+    "gasLimit":"0x186a0"
+  },
+  {
+    "type":"deposit",
+    "gasLimit":"0x186a0"
+  },
+];
