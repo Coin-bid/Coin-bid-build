@@ -9,7 +9,7 @@
           Discover, collect,and sell extraordinary NFTs
         </h3>
         <div class="content">Coin Bid The world’s first and largest digital marketplace for crypto collectibles and non-fungible tokens (NFTs). Buy, sell, and discover exclusive digital assets.</div>
-        <b-button variant="primary" size="lg">Explore</b-button>
+        <b-button variant="primary" size="lg" @click="$router.push('/auction')">Explore</b-button>
       </div>
     </b-container>
   </div>

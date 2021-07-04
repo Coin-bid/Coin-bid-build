@@ -1,0 +1,215 @@
+<template>
+    <b-container fluid="lg" >
+      <div class="introduce">
+        <div class="pic-wrapper">
+          <img :src="NFTDetail.image" alt="">
+        </div>
+        <div class="info-wrapper">
+          <h2 class="title">{{NFTDetail.name || '-'}}</h2>
+          <div class="info-row">
+            <div class="info-label">
+              <img src="../img/icon-owner@2x.png" alt="">
+              <span>Owner</span>
+              </div>
+            <div class="info-content">Random_HEX</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">
+              <img src="../img/icon-calendar@2x.png" alt="">
+              <span>Daily output of mining</span></div>
+            <div class="info-content green">1CBD</div>
+          </div>
+          <div class="info-row">
+            <div class="info-label">
+              <img src="../img/icon-miner@2x.png" alt="">
+              <span>Mined</span></div>
+            <div class="info-content red">0/1000CBD</div>
+          </div>
+          <!-- <div class="info-row">
+            <div class="info-label">
+              <img src="../img/icon-miner@2x.png" alt="">
+              <span>Price</span></div>
+            <div class="info-content red">200 $</div>
+          </div> -->
+          <div class="info-row">
+            <div class="info-label">
+              <img src="../img/icon-intro@2x.png" alt="">
+              <span>introduction of the work</span></div>
+            <div class="info-content">{{NFTDetail.description}}</div>
+          </div>
+
+          <div class="button-group">
+            <b-button class="buy-btn" variant="primary" size="lg" @click="onBuy">Buy</b-button>
+            <!-- <b-button class="buy-btn" variant="primary" size="lg" @click="onCancel">取消订单</b-button>
+            <b-button class="buy-btn" variant="primary" size="lg" @click="onUpdate">更新价格</b-button>
+            <b-button class="buy-btn" variant="primary" size="lg" @click="onDelete">删除订单</b-button> -->
+          </div>
+        </div>
+      </div>
+    </b-container>
+</template>
+
+<script>
+import config from "@/config";
+import {
+  NFTSwapContract, NFTSwapInterface, provider,
+} from '@/eth/ethereum';
+import sendTransaction from '@/common/sendTransaction';
+
+export default {
+  props: ['NFTDetail'],
+  data() {
+    return {
+      price: 200,
+      // NFTDetail: {},
+    };
+  },
+  created() {
+    // this.getDetail();
+  },
+
+  methods: {
+    async onBuy() {
+      const { tokenId } = this.$route.query;
+      // console.log( tokenId);
+      // const realPrice = this.price * 10 ** 6;
+      const buyTxHash = await sendTransaction({
+        to: config.NFTSwap,
+        gas: 960000,
+        data: NFTSwapInterface.encodeFunctionData('buy', [
+          tokenId
+        ]),
+      });
+
+      const buyTx = await provider.waitForTransaction(buyTxHash);
+
+      if (buyTx.status === 1) {
+        __g_root__.$bvToast.toast('Buy success', {
+          title: 'Tips',
+          variant: 'success',
+          autoHideDelay: 5000,
+        });
+      } else {
+        __g_root__.$bvToast.toast('Buy fail, please retry', {
+          title: 'Tips',
+          variant: 'danger',
+          autoHideDelay: 5000,
+        });
+      }
+    },
+    onCancel() {
+
+    },
+    onUpdate() {
+
+    },
+    onDelete() {
+
+    },
+    // async getDetail() {
+    //   const { id } = this.$route.params;
+
+    //   // console.log(id)
+    //   this.tokenUrl = `https://ipfs.io/ipfs/${id}`;
+
+    //   const { data } = await axios({
+    //     method: 'get',
+    //     url: this.tokenUrl,
+    //   });
+    //   this.NFTDetail = data;
+    // },
+    // toDetail() {
+    //   this.$router.push(`/auction/detail/${this.tokenId}`);
+    // },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+
+.introduce {
+  display: flex;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.pic-wrapper {
+  width: 500px;
+  height: 400px;
+  margin-right: 30px;
+  flex-shrink: 0;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.info-wrapper {
+  flex-grow: 1;
+  .title {
+    font-size: 30px;
+    font-weight: 400;
+    color: #333333;
+    margin-bottom: 20px;
+  }
+
+  .info-row {
+    padding: 14px 0;
+    display: flex;
+    &:not(:last-child) {
+      border-bottom: 1px solid #E5E5E5;
+    }
+
+    .info-label {
+      width: 240px;
+      flex-shrink: 0;
+      // display: flex;
+      // align-items: center;
+    }
+
+    img {
+      width: 16px;
+      margin-right: 15px;
+      vertical-align: middle;
+    }
+    span {
+      vertical-align: middle;
+    }
+  }
+}
+
+.green {
+  color: #00D750;
+}
+
+.red {
+  color: #E2534B;
+}
+
+.button-group {
+  margin-top: 24px;
+  .buy-btn {
+    // margin-right: 12px;
+    width: 240px;
+  }
+}
+
+@media (max-width: 992px) {
+  .pic-wrapper {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+  .introduce {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 540px) {
+
+  // .sort-btn {
+  //   margin-top: 24px;
+  // }
+}
+
+</style>

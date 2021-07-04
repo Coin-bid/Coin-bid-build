@@ -1,17 +1,18 @@
 <template>
   <div class="work-card" @click="toDetail">
     <div class="work-pic-wrapper">
-      <img class="work-pic" :src="img" alt="">
+      <img class="work-pic" :src="image" alt="">
     </div>
     <div class="info">
       <div class="row-1">
-        <span>维也纳是美丽的城市</span>
-        <span class="price">$ 0.05</span>
+        <span>{{name}}</span>
+        <span class="price">$ {{auction.lastPrice.div(10 ** 6)}}</span>
       </div>
       <div class="row-2">
-        <span>日产量：568CBD</span>
+        <span>Daily output：1CBD</span>
         <!-- <span>Ξ 0.05</span> -->
-        <span>an hours left</span>
+        <span>{{format(auction.endAt) }}</span>
+        <!-- endAt -->
       </div>
       <!-- <div class="row-3">
          <span>
@@ -24,14 +25,88 @@
 </template>
 
 <script>
+import axios from 'axios';
+import moment from 'moment';
+
+
+// 铸造只传这一段
+const mockList = [
+  'QmTmQ9YCsRuHq52cxqpDSZ7oz3JGWrTJ4k1yB231gsADAa',
+  'QmaSHQfqxNEgfHx4cedq76sfNRSraQrcuUcL3qSZJzpkZb',
+  'QmaoZzgx1pKFSEruz6CVaKuTxcsk22jMMvZBcLzmEyLpvr',
+  'QmVGQ1QjvxhHKXWLwMUazXK1cXuF5V6Wc35ubQo34Q2SiF',
+];
+
 export default {
-  props: ['img', 'id'],
+  props: ['item', 'index'],
+
+  data() {
+    return {
+      NFTDetail: {},
+    };
+  },
+
+  computed: {
+    name() {
+      // if (this.item.tokenURI) {
+      return this.NFTDetail.name;
+      // }
+      // return mockNFT.name;
+    },
+    image() {
+      // if (this.item.tokenURI) {
+      return this.NFTDetail.image;
+      // }
+      // return mockNFT.image;
+    },
+    description() {
+      // if (this.item.tokenURI) {
+      return this.NFTDetail.description;
+      // }
+      // return mockNFT.description;
+    },
+
+    auction() {
+      return this.item.auction;
+    },
+  },
+
+  created() {
+    this.getDetail();
+  },
 
   methods: {
-    toDetail() {
-      this.$router.push(`/auction/detail/${this.id}`);
-    }
-  }
+    async getDetail() {
+      const { tokenURI, auction } = this.item;
+      // const [ token ] = this.item;
+      console.log(auction.tokenId);
+      console.log();
+
+      const tokenIdx = mockList[this.index % 4];
+      this.tokenUrl = tokenURI || `https://ipfs.io/ipfs/${tokenIdx}`;
+
+      const { data } = await axios({
+        method: 'get',
+        url: this.tokenUrl,
+      });
+
+      // console.log(data)
+      this.NFTDetail = data;
+    },
+    format(endAt) {
+      const diff = moment(endAt * 1000).fromNow();
+      return diff;
+    },
+    toDetail(idx) {
+      const { tokenURI, auction } = this.item;
+      if (auction.tokenId.eq(0)) {
+        const tokenIdx = mockList[this.index % 4];
+        this.$router.push(`/auction/detail/?tokenIdx=${tokenIdx}&price=${auction.lastPrice}&endTime=${auction.endAt}&startTime=${auction.startedAt}`);
+      } else {
+        this.$router.push(`/auction/detail/?tokenId=${auction.tokenId}`);
+      }
+    },
+  },
 };
 </script>
 

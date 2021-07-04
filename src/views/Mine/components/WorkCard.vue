@@ -1,18 +1,17 @@
 <template>
-  <div class="work-card">
+  <div class="work-card" @click="onClick">
     <div class="work-pic-wrapper">
-      <img class="work-pic" :src="img" alt="">
+      <img class="work-pic" :src="NFTDetail.image" alt="">
     </div>
     <div class="info">
       <div class="row-1">
-        <span>维也纳是美丽的城市</span>
-        <span class="price">$ 0.05</span>
+        <span>{{NFTDetail.name}}</span>
+        <span>Daily output：1CBD</span>
       </div>
-      <div class="row-2">
-        <span>日产量：568CBD</span>
-        <!-- <span>Ξ 0.05</span> -->
+      <!-- <div class="row-2">
+        <span>Daily output：1CBD</span>
         <span>an hours left</span>
-      </div>
+      </div> -->
       <!-- <div class="row-3">
          <span>
            <img src="@/assets/img/icon-lock@2x.png" alt="">
@@ -24,15 +23,57 @@
 </template>
 
 <script>
+import axios from 'axios';
+import moment from 'moment';
+
+
 export default {
-  props: ['img'],
+  props: ['item'],
+
+  data() {
+    return {
+      NFTDetail: {},
+    }
+  },
+  created() {
+    this.getDetail();
+  },
+  methods: {
+    async getDetail() {
+      const { tokenURI, tokenId } = this.item;
+      // const [ token ] = this.item;
+      // console.log(auction.tokenId);
+      // console.log();
+
+      // const tokenIdx = mockList[this.index % 4];
+      this.tokenUrl = tokenURI || `https://ipfs.io/ipfs/${tokenIdx}`;
+
+      const { data } = await axios({
+        method: 'get',
+        url: this.tokenUrl,
+      });
+
+      console.log(data)
+      this.NFTDetail = data;
+    },
+
+    onClick() {
+      const { tokenURI, tokenId } = this.item;
+      this.$router.push({
+        path: '/mine/work/detail',
+        query: {
+          tokenId,
+        }
+      })
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 .work-card {
   width: 285px;
-  height: 275px;
+  height: 250px;
   background: #FFFFFF;
   border-radius: 5px;
   box-shadow: 0px 3px 20px 0px rgba(205, 204, 211, 0.5);

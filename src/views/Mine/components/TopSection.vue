@@ -6,14 +6,25 @@
       <div class="img-wrapper">
       <img src="../img/avatar@2x.png" alt="">
       </div>
-      <div class="name">Mr. Alain Cartwright</div>
+      <!-- <div class="name">Mr. Alain Cartwright</div> -->
       <div class="address">
-        地址：OXACO7F5bdfa
+        地址：{{address}}
         <img class="copy" src="../img/copy@2x.png" alt="">
       </div>
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    address: {
+      type: String,
+      default: '',
+    },
+  },
+};
+</script>
 
 <style lang="scss" scoped>
 .top-section {

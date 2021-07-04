@@ -21,7 +21,7 @@
         <b-navbar-nav>
           <b-nav-item :active="$route.path === '/'"  @click="$router.push('/')">Home</b-nav-item>
           <b-nav-item :active="$route.path.startsWith('/auction')" @click="$router.push('/auction')">Auction</b-nav-item>
-          <b-nav-item :active="$route.path.startsWith('/governance')"  @click="$router.push('/governance')">Governance</b-nav-item>
+          <b-nav-item :active="$route.path.startsWith('/governance')"  @click="onClickGovernance">Governance</b-nav-item>
           <!-- <b-nav-item href="/blog">Blog</b-nav-item> -->
           <b-nav-item :active="$route.path.startsWith('/introduce')" @click="$router.push('/introduce')">Introduce</b-nav-item>
         </b-navbar-nav>
@@ -123,6 +123,10 @@ export default {
       this.$store.dispatch('unlockByMetaMask');
       // __g_account__.unlockByMetaMask();
     },
+
+    onClickGovernance() {
+      window.open('https://gov.coin-bid.io/#/');
+    }
     // onClick() {
     //   __g_root__.$bvToast.toast('Coming soon...', {
     //     title: 'Notice',

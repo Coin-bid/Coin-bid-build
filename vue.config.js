@@ -36,6 +36,7 @@ module.exports = {
     config.externals = {
     }
     // config.devtool = 'cheap-eval-source-map';
+    config.optimization.minimizer = [];
 
     config.resolve = {
       extensions:['.js', '.vue', '.json'],
@@ -45,6 +46,7 @@ module.exports = {
       }
     }
 
+
     config.plugins.push(new webpack.IgnorePlugin({
       resourceRegExp: /^\.\/locale$/,
       contextRegExp: /moment$/
@@ -53,7 +55,7 @@ module.exports = {
 
   chainWebpack: config => {
     // 移除 prefetch 插件
-    config.plugins.delete('prefetch-index');
+    // config.plugins.delete('prefetch-index');
     // config.plugins.delete('prefetch-index');
     config.module
     .rule("i18n")

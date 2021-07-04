@@ -7,7 +7,7 @@
         <span>$ 0.05</span>
       </div>
       <div class="row-2">
-        <span>日产量：568CBD</span>
+        <span>Daily output：568CBD</span>
         <!-- <span>Ξ 0.05</span> -->
         <span>an hours left</span>
       </div>

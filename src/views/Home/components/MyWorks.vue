@@ -14,7 +14,7 @@
       </b-col>
     </b-row>
     <div class="more-wrapper">
-      <b-button variant="primary">View More</b-button>
+      <b-button variant="primary" @click="$router.push('/mine')">View More</b-button>
     </div>
   </b-container>
 </div>

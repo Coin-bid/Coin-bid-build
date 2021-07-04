@@ -2,34 +2,34 @@
     <b-container fluid="lg" >
       <div class="introduce">
         <div class="pic-wrapper">
-          <img src="../img/pic@2x.png" alt="">
+          <img :src="NFTDetail.image" alt="">
         </div>
         <div class="info-wrapper">
-          <h2 class="title">维也纳斯的美丽城市</h2>
+          <h2 class="title">{{NFTDetail.name || '-'}}</h2>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-owner@2x.png" alt="">
-              <span>拥有者</span>
+              <span>Owner</span>
               </div>
             <div class="info-content">Random_HEX</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-calendar@2x.png" alt="">
-              <span>日挖矿产量</span></div>
-            <div class="info-content green">10000CBD</div>
+              <span>Daily output of mining</span></div>
+            <div class="info-content green">1CBD</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-miner@2x.png" alt="">
-              <span>已挖</span></div>
-            <div class="info-content red">188/10000CBD</div>
+              <span>Mined</span></div>
+            <div class="info-content red">0/1000CBD</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-intro@2x.png" alt="">
-              <span>作品介绍</span></div>
-            <div class="info-content">Galaxy is a remarkable abstract expressionism painting of a galaxy, with it's brilliant stars and cosmic dust. ... The style of this artwork is best described as Abstract, Expressionism. The genre portrayed in this piece of art is Avant-Garde.this artwork is best described as Abstract, Expressionism. The genre portrayed in this piece of art is Avant-Garde.</div>
+              <span>introduction of the work</span></div>
+            <div class="info-content">{{NFTDetail.description}}</div>
           </div>
         </div>
       </div>
@@ -37,9 +37,39 @@
 </template>
 
 <script>
-export default {
+import axios from 'axios';
+import moment from 'moment';
 
-}
+
+export default {
+  props: ['NFTDetail'],
+  data() {
+    return {
+      // NFTDetail: {},
+    }
+  },
+  created() {
+    // this.getDetail();
+  },
+
+  methods: {
+    // async getDetail() {
+    //   const { id } = this.$route.params;
+
+    //   // console.log(id)
+    //   this.tokenUrl = `https://ipfs.io/ipfs/${id}`;
+
+    //   const { data } = await axios({
+    //     method: 'get',
+    //     url: this.tokenUrl,
+    //   });
+    //   this.NFTDetail = data;
+    // },
+    // toDetail() {
+    //   this.$router.push(`/auction/detail/${this.tokenId}`);
+    // },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -62,6 +92,7 @@ export default {
 }
 
 .info-wrapper {
+  flex-grow: 1;
   .title {
     font-size: 30px;
     font-weight: 400;
@@ -77,7 +108,7 @@ export default {
     }
 
     .info-label {
-      width: 176px;
+      width: 240px;
       flex-shrink: 0;
       // display: flex;
       // align-items: center;
@@ -113,7 +144,6 @@ export default {
 }
 
 @media (max-width: 540px) {
-
 
   // .sort-btn {
   //   margin-top: 24px;

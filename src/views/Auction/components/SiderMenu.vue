@@ -5,6 +5,7 @@
       v-for="item in menuList"
       class="menu-item"
       :class="{active: item.active}"
+      @click="$router.push(item.path)"
     >
       <img :src=" item.active ? item.aIcon : item.icon">
       <span class="text">{{item.label}}</span>
@@ -16,36 +17,37 @@
 export default {
   data() {
     return {
-      menuList: [
-        {
-          label: '封面图片',
-          path: '/auction',
-          icon: require('../img/icon-cover-active@2x.png'),
-          aIcon: require('../img/icon-cover@2x.png'),
-          active: this.$route.path === '/auction',
-        },
+
+    };
+  },
+
+  computed: {
+    menuList() {
+      return [
+        // {
+        //   label: '拍卖画布',
+        //   path: '/auction/cover',
+        //   icon: require('../img/icon-cover-active@2x.png'),
+        //   aIcon: require('../img/icon-cover@2x.png'),
+        //   active: this.$route.path === '/auction/cover',
+        // },
 
         {
-          label: '拍卖作品',
+          label: 'Auction works',
           path: '/auction/works',
           icon: require('../img/icon-works-active@2x.png'),
           aIcon: require('../img/icon-works@2x.png'),
           active: this.$route.path === '/auction/works',
         },
-
-          {
-          label: '用户作品展示',
+        {
+          label: 'Transfer of works',
           path: '/auction/user',
           icon: require('../img/icon-user-active@2x.png'),
           aIcon: require('../img/icon-user@2x.png'),
           active: this.$route.path === '/auction/user',
         },
-      ],
-    };
-  },
-
-  computed: {
-
+      ]
+    }
   },
 };
 </script>

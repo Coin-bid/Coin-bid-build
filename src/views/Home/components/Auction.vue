@@ -9,7 +9,8 @@
         <b-col span="6" class="auction-info">
           <h3>Covers In Auction</h3>
           <p>Artists obtain the right to create NFT through bidding, thereby obtaining the opportunity to display the art works and the right to hold auction proceeds.</p>
-          <b-button class="btn" variant="primary" size="lg">View More</b-button>
+          <b-button
+            class="btn" variant="primary" size="lg" @click="$router.push('/mine')">Buy Canvas</b-button>
         </b-col>
       </b-row>
 
@@ -17,7 +18,7 @@
         <b-col span="6" class="auction-info">
            <h3>Creations In Auction</h3>
           <p>Community collectors obtain NFTs through bidding, enjoy the income from NFT mining, and can also transfer their NFTs at any time.</p>
-          <b-button  class="btn" variant="primary" size="lg">View More</b-button>
+          <b-button  class="btn" variant="primary" size="lg" @click="$router.push('/auction/works')">View More</b-button>
         </b-col>
         <b-col span="6">
           <img class="auction-img-1" src="@/assets/img/auction-2@2x.png" alt="">

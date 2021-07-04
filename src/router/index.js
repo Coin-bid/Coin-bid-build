@@ -21,19 +21,54 @@ const routes = [
       {
         path: '/auction',
         name: 'Auction',
+        redirect: '/auction/works',
         component: () => import('@/views/Auction'),
+        children: [
+          {
+            path: '/auction/:type(cover)',
+            name: 'AuctionCover',
+            component: () => import('@/views/Auction/components/WorkList.vue'),
+          },
+          {
+            path: '/auction/:type(works)',
+            name: 'AuctionWorks',
+            component: () => import('@/views/Auction/components/WorkList.vue'),
+          },
+          {
+            path: '/auction/:type(user)',
+            name: 'AuctionUser',
+            component: () => import('@/views/Auction/components/TransWorkList.vue'),
+          },
+        ]
       },
 
       {
-        path: '/auction/detail/:id',
+        path: '/auction/detail',
         name: 'AuctionDetail',
         component: () => import('@/views/AuctionDetail'),
+      },
+
+      {
+        path: '/cavas/detail',
+        name: 'CanvasDetail',
+        component: () => import('@/views/CanvasDetail'),
       },
 
       {
         path: '/mine',
         name: 'Mine',
         component: () => import('@/views/Mine'),
+      },
+      {
+        path: '/mine/work/detail',
+        name: 'MineWorkDetail',
+        component: () => import('@/views/MineWorkDetail'),
+      },
+
+      {
+        path: '/swap/detail',
+        name: 'MineWorkDetail',
+        component: () => import('@/views/SwapDetail'),
       },
 
       {

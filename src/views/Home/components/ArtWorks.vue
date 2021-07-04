@@ -15,7 +15,7 @@
             <span>$ 0.05</span>
           </div>
           <div class="name-sub">
-            <span>日产量：568CBD</span>
+            <span>Daily output：568CBD</span>
             <span>an hours left</span>
           </div>
          </div>
@@ -32,7 +32,7 @@
               <span>$ 0.05</span>
             </div>
             <div class="name-sub">
-              <span>日产量：568CBD</span>
+              <span>Daily output：568CBD</span>
               <span>an hours left</span>
             </div>
           </div>
@@ -47,7 +47,7 @@
               <span>$ 0.05</span>
             </div>
             <div class="name-sub">
-              <span>日产量：568CBD</span>
+              <span>Daily output：568CBD</span>
               <span>an hours left</span>
             </div>
           </div>
@@ -64,13 +64,13 @@
               <span>$ 0.05</span>
             </div>
             <div class="name-sub">
-              <span>日产量：568CBD</span>
+              <span>Daily output：568CBD</span>
               <span>an hours left</span>
             </div>
           </div>
         </div>
         <div class="last-card">
-          <b-button variant="primary">View More</b-button>
+          <b-button variant="primary" @click="$router.push('/auction/user')">View More</b-button>
         </div>
       </div>
     </div>

@@ -7,7 +7,7 @@
           <img src="../img/CBD@2x.png" alt="">
         </div>
         <div class="token-info">
-          <div class="count">4494</div>
+          <div class="count">{{cbdBalance ? (cbdBalance /1e18).toFixed(2) : 0}}</div>
           <div class="symbol">CBD</div>
         </div>
       </div>
@@ -17,7 +17,7 @@
 
         </div>
         <div class="token-info">
-          <div class="count">4494</div>
+          <div class="count">{{usdtBalance ? (usdtBalance / 1e6).toFixed(2) : 0}}</div>
           <div class="symbol">USDT</div>
         </div>
       </div>
@@ -27,7 +27,7 @@
 
         </div>
         <div class="token-info">
-          <div class="count">4494</div>
+          <div class="count">{{ethBalance ? (ethBalance / 1e18).toFixed(2) : 0}}</div>
           <div class="symbol">ETH</div>
         </div>
       </div>
@@ -36,8 +36,8 @@
           <img src="../img/icon-daily@2x.png" alt="">
         </div>
         <div class="token-info">
-          <div class="count">4494CBD</div>
-          <div class="symbol">每日收益</div>
+          <div class="count">{{dailyEarning ? (dailyEarning / 1e18).toFixed(2) : 0}}CBD</div>
+          <div class="symbol">Daily earned</div>
         </div>
       </div>
       <div class="token-item">
@@ -45,15 +45,64 @@
           <img src="../img/icon-total@2x.png" alt="">
         </div>
         <div class="token-info">
-          <div class="count">4494CBD</div>
-          <div class="symbol">总产量</div>
+          <div class="count">{{earnedBalance ? (earnedBalance / 1e18).toFixed(2) : 0}}CBD</div>
+          <div class="symbol">Total earned</div>
         </div>
-        <b-button class="withdraw-btn" variant="primary" size="sm" >提取</b-button>
+        <b-button class="withdraw-btn" :disabled="claimLoading" variant="primary" size="sm" @click="onClaim">Withdraw</b-button>
       </div>
     </div>
   </b-container>
 </template>
 
+<script>
+import config from '@/config';
+import {
+  miningInterface, provider,
+} from '@/eth/ethereum';
+import sendTransaction from '@/common/sendTransaction';
+
+export default {
+  props: ['address', 'ethBalance', 'usdtBalance', 'cbdBalance', 'earnedBalance', 'dailyEarning'],
+  data() {
+    return {
+      claimLoading: false,
+    }
+  },
+  methods: {
+
+    async onClaim() {
+
+      this.claimLoading = true;
+
+
+      console.log(config.mining)
+      console.log(miningInterface)
+      const txHash = await sendTransaction({
+        to: config.mining,
+        // gas: 960000,
+        data: miningInterface.encodeFunctionData('claim()'),
+      });
+      const claimTx = await provider.waitForTransaction(txHash);
+
+      this.claimLoading = false;
+
+      if (claimTx.status === 1) {
+        __g_root__.$bvToast.toast('Withdraw success', {
+          title: 'Tips',
+          variant: 'success',
+          autoHideDelay: 5000,
+        });
+      } else {
+        __g_root__.$bvToast.toast('Withdraw failed', {
+          title: 'Tips',
+          variant: 'danger',
+          autoHideDelay: 5000,
+        });
+      }
+    },
+  }
+}
+</script>
 <style lang="scss" scoped>
 .token-section {
   background: #FFFFFF;
@@ -89,6 +138,7 @@
   border-radius: 50%;
   // background: red;
   margin-right: 20px;
+  flex-shrink: 0;
   img {
     width: 100%;
     height: 100%;

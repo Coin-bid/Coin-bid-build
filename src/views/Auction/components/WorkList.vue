@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    <div class="condition-bar">
+  <div class="work-list">
+    <!-- <div class="condition-bar">
       <div class="checkbox-group">
          <b-checkbox class="checkbox" v-model="checked1">我拥有的作品</b-checkbox>
         <b-checkbox  class="checkbox"  v-model="checked2">备选项</b-checkbox>
@@ -20,22 +20,26 @@
            </span>
           </b-button>
       </div>
-    </div>
-
+    </div> -->
+  <b-overlay :show="loading" rounded="sm">
    <b-row
     class="work-list-wrapper"
     :no-gutters="true"
    >
       <b-col
         v-for="(item, idx) in list"
-        :key="idx"
+        :key="item.id"
         span="12"
         md="6"
         xl="4"
       >
-        <WorkCard class="work-card"  :img="item.img" :id="item.id"/>
+        <WorkCard class="work-card"
+          :item="item"
+          :index="idx"
+        />
       </b-col>
     </b-row>
+    </b-overlay>
     <div class="pagination-wrapper">
       <b-pagination
         v-model="currentPage"
@@ -44,6 +48,7 @@
         :hide-goto-end-buttons="true"
         class="pagination"
         aria-controls="my-table"
+        @change="onChange"
       >
         <!-- <template #first-text>
           <span>
@@ -72,8 +77,11 @@
 </template>
 
 <script>
+import { NFTAuctionContract } from '@/eth/ethereum';
 import WorkCard from './WorkCard.vue';
 
+
+console.log(NFTAuctionContract);
 export default {
   components: {
     WorkCard,
@@ -81,41 +89,62 @@ export default {
   data() {
     return {
 
-      perPage: 3,
+      perPage: 12,
       currentPage: 1,
       rows: 10,
+
+      loading: false,
       checked1: '',
       checked2: '',
 
-      list: [
-        {
-          id: 1,
-          img: require('@/assets/img/art-work-1@2x.png'),
-        },
-        {
-          id: 2,
-          img: require('@/assets/img/art-work-2@2x.png'),
-        },
-        {
-          id: 3,
-          img: require('@/assets/img/art-work-3@2x.png'),
-        },
-        {
-          id: 4,
-          img: require('@/assets/img/art-work-1@2x.png'),
-        },
-        {
-          id: 5,
-          img: require('@/assets/img/art-work-2@2x.png'),
-        },
-
-      ],
+      list: [],
     };
   },
+
+  mounted() {
+    this.getList();
+  },
+
+  methods: {
+    async getList() {
+      this.loading = true;
+      // try {
+      const res = await NFTAuctionContract.getNFTInAuction(this.perPage, this.currentPage - 1);
+      const [list, total] = res;
+      this.rows = total.toNumber();
+
+      this.list = list.map((item, idx) => {
+        return {
+          ...item,
+          id: `${this.currentPage}_${idx}`,
+        }
+      });;
+
+      console.log(list, total);
+      // } catch (error) {
+      //   console.error(error);
+      // }
+      this.loading = false;
+      this.$forceUpdate();
+
+    },
+    onChange(page) {
+      this.currentPage = page;
+      this.getList();
+    }
+  }
 };
 </script>
 
 <style lang="scss" scoped>
+
+.work-list {
+  margin-left: 105px;
+  flex-grow: 1;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
 .condition-bar {
   display: flex;
   justify-content: flex-end;
