@@ -4,8 +4,8 @@
       :NFTDetail="NFTDetail"
       :isInOrder="isInOrder"
     />
-    <!-- <Price :auction="auction"/>
-    <Change/> -->
+    <!-- <Price :auction="auction"/> -->
+    <Change/>
   </div>
 </template>
 
@@ -16,15 +16,15 @@ import moment from 'moment';
 import { miningContract } from "@/eth/ethereum";
 // import { BigNumber } from 'ethers';
 import Introduce from './components/Introduce.vue';
-// import Price from './components/Price.vue';
-// import Change from './components/Change.vue';
+import Price from './components/Price.vue';
+import Change from './components/Change.vue';
 
 console.log(miningContract.functions)
 export default {
   components: {
     Introduce,
-    // Price,
-    // Change,
+    Price,
+    Change,
   },
 
   data() {
@@ -45,18 +45,14 @@ export default {
 
   methods: {
     async getDetail() {
-      const { tokenId, tokenIdx } = this.$route.query;
+      const { tokenId } = this.$route.query;
       // getInfoById(uint _tokenId)
       if (tokenId) {
         const [result] = await miningContract.functions.getInfoById(tokenId);
         console.log('token', result);
 
         const { tokenURI, isInOrder } = result;
-        // console.log(result.isInOrder)
-
         this.isInOrder = isInOrder;
-        // const [token] = result;
-        // const { auction, tokenURI } = token;
 
         // this.auction = auction;
 
@@ -97,4 +93,5 @@ export default {
     margin-bottom: 128px;
 
 }
+
 </style>

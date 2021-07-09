@@ -2,6 +2,7 @@
   <div class="auction-detail">
     <Introduce
       :NFTDetail="NFTDetail"
+      :auction="auction"
     />
     <Price :auction="auction"/>
     <Change/>

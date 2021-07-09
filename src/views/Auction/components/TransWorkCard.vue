@@ -6,7 +6,7 @@
     <div class="info">
       <div class="row-1">
         <span>{{name}}</span>
-        <span class="price">$ {{swap.price.div(10 ** 6)}}</span>
+        <span class="price">{{swap.price.div(10 ** 6)}}USDT</span>
       </div>
       <div class="row-2">
         <span>Daily output：1CBD</span>
@@ -103,7 +103,7 @@ export default {
       //   const tokenIdx = mockList[this.index % 4];
       //   this.$router.push(`/auction/detail/?tokenIdx=${tokenIdx}&price=${auction.lastPrice}&endTime=${auction.endAt}&startTime=${auction.startedAt}`);
       // } else {
-        this.$router.push(`/swap/detail/?tokenId=${swap.tokenId}`);
+      this.$router.push(`/swap/detail/?tokenId=${swap.tokenId}&price=${swap.price}&seller=${swap.seller}`);
       // }
     },
   },

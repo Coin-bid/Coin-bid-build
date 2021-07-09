@@ -1,3 +1,14 @@
+<i18n>
+{
+  "en": {
+    "dailyOutput": "Daily output"
+
+  },
+  "zh": {
+    "dailyOutput": "日产量"
+  }
+}
+</i18n>
 <template>
   <div class="work-card" @click="toDetail">
     <div class="work-pic-wrapper">
@@ -6,10 +17,10 @@
     <div class="info">
       <div class="row-1">
         <span>{{name}}</span>
-        <span class="price">$ {{auction.lastPrice.div(10 ** 6)}}</span>
+        <span class="price">{{auction.lastPrice.div(10 ** 6)}}USDT</span>
       </div>
       <div class="row-2">
-        <span>Daily output：1CBD</span>
+        <span>{{$t('dailyOutput')}}：1CBD</span>
         <!-- <span>Ξ 0.05</span> -->
         <span>{{format(auction.endAt) }}</span>
         <!-- endAt -->

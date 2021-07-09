@@ -1,3 +1,38 @@
+<i18n>
+{
+  "en": {
+    "price": "Price",
+    "output": "Daily output of mining",
+    "period": "Period of validity",
+    "ownedQuantity": "Owned quantity",
+    "introduce": "Introduce",
+    "introduceDesc": "Magic canvas, with which you can create works",
+
+    "quantity": "Quantity",
+
+    "buy": "Buy canvas",
+    "mustInteger": "Must be integer",
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "createWorks": "Create works"
+    },
+    "zh": {
+      "price": "价格",
+      "output": "挖矿日产量",
+      "period": "有效期",
+      "ownedQuantity": "拥有数量",
+      "introduce": "介绍",
+      "introduceDesc": "神奇的画布，可以创作作品",
+      "quantity": "数量",
+      "buy": "购买画布",
+      "mustInteger": "必须是整数",
+      "cancel": "取消",
+      "confirm": "确认",
+      "createWorks": "创建作品"
+    }
+}
+</i18n>
+
 <template>
     <b-container fluid="lg" >
       <div class="introduce">
@@ -9,37 +44,37 @@
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-owner@2x.png" alt="">
-              <span>Price</span>
+              <span>{{$t('price')}}</span>
               </div>
-            <div class="info-content">{{price / 10 ** 18}}</div>
+            <div class="info-content">{{price / 10 ** 18}}CBD</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-calendar@2x.png" alt="">
-              <span>Daily output of mining</span></div>
+              <span>{{$t('output')}}</span></div>
             <div class="info-content green">1CBD</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-miner@2x.png" alt="">
-              <span>Period of validity</span></div>
+              <span>{{$t('period')}}</span></div>
             <div class="info-content red">1000 Days</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-miner@2x.png" alt="">
-              <span>Owned quantity</span></div>
+              <span>{{$t('ownedQuantity')}}</span></div>
             <div class="info-content red">{{canvasAmount}}</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-intro@2x.png" alt="">
-              <span>Introduce</span></div>
-            <div class="info-content">Magic canvas, with which you can create works</div>
+              <span>{{$t('introduce')}}</span></div>
+            <div class="info-content">{{$t('introduceDesc')}}</div>
           </div>
 
           <div class="buy-btn-wrapper">
-            <b-button id="popover-reactive-1" class="buy-btn" variant="primary" size="lg">Buy canvas</b-button>
+            <b-button id="popover-reactive-1" class="buy-btn" variant="primary" size="lg">{{$t('buy')}}</b-button>
             <b-popover
               target="popover-reactive-1"
               triggers="click"
@@ -55,16 +90,16 @@
                 <b-button @click="onClose" class="close" aria-label="Close">
                   <span class="d-inline-block" aria-hidden="true">&times;</span>
                 </b-button>
-                Quantity
+                {{$t('quantity')}}
               </template>
 
               <div>
                 <b-form-group
-                  label="Quantity"
+                  :label="$t('quantity')"
                   label-for="popover-input-1"
                   label-cols="4"
                   :state="amountstate"
-                  invalid-feedback="Must be integer"
+                  :invalid-feedback="$t('mustInteger')"
                 >
                   <b-form-input
                     ref="amount"
@@ -76,12 +111,12 @@
                 </b-form-group>
 
                 <div class="button-wrapper">
-                  <b-button @click="onClose" class="cancel-btn" size="sm" variant="danger">Cancel</b-button>
-                  <b-button @click="onOk" :disabled="submitting" class="ok-btn" size="sm" variant="primary">Confirm</b-button>
+                  <b-button @click="onClose" class="cancel-btn" size="sm" variant="danger">{{$t('cancel')}}</b-button>
+                  <b-button @click="onOk" :disabled="submitting" class="ok-btn" size="sm" variant="primary">{{$t('confirm')}}</b-button>
                 </div>
               </div>
             </b-popover>
-            <b-button class="create-btn" variant="primary" size="lg" @click="onCreate">Create works</b-button>
+            <b-button class="create-btn" variant="primary" size="lg" @click="onCreate">{{$t('createWorks')}}</b-button>
           </div>
         </div>
       </div>
@@ -305,7 +340,7 @@ export default {
 .buy-btn-wrapper {
   margin-top: 24px;
   & .buy-btn {
-    width: 240px;
+    // width: 240px;
   }
   .create-btn {
     margin-left: 24px;

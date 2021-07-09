@@ -1,5 +1,7 @@
 import Vue from 'vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import i18n from '@/i18n';
+import { getLang } from '@/common/lang';
 import * as echarts from 'echarts';
 import VueECharts from 'vue-echarts';
 import VueCompositionAPI from '@vue/composition-api';
@@ -10,6 +12,7 @@ import router from './router';
 import store from './store';
 import './filters/toFixed';
 import './filters/formatTime';
+import './filters/trimAddress';
 
 import '@/styles/theme-overrides/index.scss';
 
@@ -20,13 +23,13 @@ Vue.use(IconsPlugin);
 
 Vue.use(VueCompositionAPI);
 
-
 Vue.component('v-charts', VueECharts);
 
 Vue.config.productionTip = false;
 
 window.__g_store__ = store;
 window.__g_router__ = router;
+window.__g_i18n__ = i18n;
 // window.__g_account__ = new Account();
 // Vue.prototype.$account = window.__g_account__;
 
@@ -54,11 +57,16 @@ if (window.ethereum) {
   window.ethereum.on('accountsChanged', (accounts) => {
     store.dispatch('handleAccountsChanged', accounts);
   });
+}
 
+const lang = getLang();
+if (['zh', 'en'].includes(lang)) {
+  i18n.locale = lang;
 }
 
 // eslint-disable-next-line no-underscore-dangle
 window.__g_root__ = new Vue({
+  i18n,
   router,
   store,
   render: (h) => h(App),

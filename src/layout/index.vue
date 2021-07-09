@@ -4,13 +4,14 @@
       <div class="fixed-header">
         <navbar />
       </div>
-      <router-view />
+      <router-view v-if="user.loaded"/>
       <LatestNews />
       <footerbar />
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import Navbar from './components/Navbar.vue';
 import Footerbar from './components/Footerbar.vue';
 import LatestNews from '@/components/LatestNews.vue';
@@ -23,7 +24,9 @@ export default {
     LatestNews,
   },
   computed: {
-
+    ...mapState({
+      user: (state) => state.user,
+    })
   },
   created() {
     console.log(this.$bvToast);

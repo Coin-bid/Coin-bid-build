@@ -1,3 +1,13 @@
+<i18n>
+{
+  "en": {
+    "withdraw": "Withdraw"
+  },
+  "zh": {
+    "withdraw": "提币"
+  }
+}
+</i18n>
 <template>
   <b-container fluid="lg" >
     <div class="token-section">
@@ -48,7 +58,7 @@
           <div class="count">{{earnedBalance ? (earnedBalance / 1e18).toFixed(2) : 0}}CBD</div>
           <div class="symbol">Total earned</div>
         </div>
-        <b-button class="withdraw-btn" :disabled="claimLoading" variant="primary" size="sm" @click="onClaim">Withdraw</b-button>
+        <b-button class="withdraw-btn" :disabled="claimLoading" variant="primary" size="sm" @click="onClaim">{{$t('withdraw')}}</b-button>
       </div>
     </div>
   </b-container>
@@ -56,9 +66,7 @@
 
 <script>
 import config from '@/config';
-import {
-  miningInterface, provider,
-} from '@/eth/ethereum';
+import { miningInterface, provider } from '@/eth/ethereum';
 import sendTransaction from '@/common/sendTransaction';
 
 export default {

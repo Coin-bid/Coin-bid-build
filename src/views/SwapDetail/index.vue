@@ -2,6 +2,9 @@
   <div class="auction-detail">
     <Introduce
       :NFTDetail="NFTDetail"
+      :price="price"
+      :seller="seller"
+      :mining-info="miningInfo"
     />
     <!-- <Price :auction="auction"/>
     <Change/> -->
@@ -10,11 +13,7 @@
 
 <script>
 import axios from 'axios';
-import moment from 'moment';
-// import { BigNumber } from 'ethers';
 import Introduce from './components/Introduce.vue';
-// import Price from './components/Price.vue';
-// import Change from './components/Change.vue';
 import { miningContract } from "@/eth/ethereum";
 
 
@@ -29,10 +28,15 @@ export default {
   data() {
     return {
       NFTDetail: {},
+      price: '',
+      seller: '',
       auction: {
         lastPrice: 0,
         endAt: 0,
         startedAt: 0,
+      },
+      miningInfo: {
+        remainingAmout: 0,
       },
     }
   },
@@ -43,20 +47,23 @@ export default {
 
   methods: {
     async getDetail() {
-      const { tokenId, tokenIdx } = this.$route.query;
+      const { tokenId, price, seller } = this.$route.query;
 
+      this.price = price;
+      this.seller = seller;
       if (tokenId) {
         const result = await miningContract.functions.getInfoById(tokenId);
-        console.log('token', result);
-        const [ token ] = result;
-        const { auction, tokenURI } = token;
-        this.auction = auction;
+        const [token] = result;
+        const { miningInfo, tokenURI } = token;
+        this.miningInfo = miningInfo;
 
+        console.log(result)
         const { data } = await axios({
           method: 'get',
           url: tokenURI,
         });
         this.NFTDetail = data;
+
         // console.log('detail:', auction, tokenURI);
         // console.log('endAt:', new moment(this.auction.endAt * 1000).format('YYYY-MM-DD HH:mm:ss'));
       }

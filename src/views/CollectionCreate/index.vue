@@ -1,12 +1,55 @@
+<i18n>
+{
+  "en": {
+    "title": "Create your collection",
+    "content": "You can change these values later, along with configuring external URLs, payment options, and trading fees.",
+    "upload": "Upload",
+    "uploadImg": "Please upload image",
+    "canvas": "Canvas",
+    "uploadTip": "Only JPG / PNG files can be uploaded, and no more than 500kb",
+    "total": "Total output",
+    "daily": "Daily output",
+
+    "nameError": "Your name must be input.",
+    "descError": "Your description must be input.",
+
+    "namePl": "Example: Treasures of the Sea",
+    "descPl": "Provide a description for your store.",
+    "countText": " of 1000 characters used",
+    "submit": "Submit",
+
+    "fieldTitle": "Title",
+    "description": "Description"
+    },
+    "zh": {
+      "title": "创建您的作品",
+      "content": "您可以稍后更改这些值，同时配置外部 URL、付款选项和交易费用。",
+      "upload": "上传",
+      "uploadImg": "请上传图片",
+      "canvas": "画布",
+      "uploadTip": "只能上传 JPG / PNG 文件，不能上传超过500kb",
+      "total": "总产量",
+      "daily": "每日产量",
+      "nameError": "您的名字必须输入。",
+      "descError": "您的描述必须输入。",
+      "namePl": "示例：海洋宝藏",
+      "descPl": "提供您商店的描述。",
+      "countText": " 已使用 1000 个字符",
+      "submit": "提交",
+
+      "fieldTitle": "标题",
+      "description": "描述"
+    }
+}
+</i18n>
 <template>
   <div class="collection-create">
      <div class="top-bar">
        <b-container fluid="lg">
          <div class="top-content">
-           <h2>Create your collection</h2>
+           <h2>{{$t('title')}}</h2>
             <p class="desc">
-              You can change these values later, along with configuring external URLs,
-              payment options, and trading fees.
+              {{$t('content')}}
             </p>
          </div>
        </b-container>
@@ -23,17 +66,17 @@
               </template>
               <template v-else>
                 <img class="file-pl-image" key="file-pl-image"  :src="require('./img/img-placeholder@2x.png')" alt="">
-                <b-button variant="primary" class="upload-btn" :disabled="uploadLoading">Upload</b-button>
+                <b-button variant="primary" class="upload-btn" :disabled="uploadLoading">{{$t('upload')}}</b-button>
               </template>
               <input type="file" ref="fileInput" accept="image/*" class="file-input" @change="onFileChange">
                <b-form-invalid-feedback :state="imgValidation">
-                  Please upload image
+                  {{$t('uploadImg')}}
                 </b-form-invalid-feedback>
             </div>
             <div class="cover-info">
-              <div class="title">封面<span class="red">*</span> </div>
+              <div class="title">{{$t('canvas')}}<span class="red">*</span> </div>
               <div class="recommend">(350 x 350 recommended) </div>
-              <div class="tip">只能上传jpg/png文件，且不超过500kb</div>
+              <div class="tip">{{$t('uploadTip')}}</div>
               <div class="summary-container">
                 <div class="token">
                   <div class="icon-wrapper">
@@ -41,7 +84,7 @@
                   </div>
                   <div class="token-info">
                     <div class="value">1000CBD</div>
-                    <div class="label">代币总量</div>
+                    <div class="label">{{$t('total')}}</div>
                   </div>
                 </div>
 
@@ -52,7 +95,7 @@
                   </div>
                   <div class="token-info">
                     <div class="value">1/1000CBD</div>
-                    <div class="label">Daily output</div>
+                    <div class="label">{{$t('daily')}}</div>
                   </div>
                 </div>
               </div>
@@ -61,7 +104,7 @@
 
         <b-form-group
           id="input-group-1"
-          label="Title"
+          :label="$t('fieldTitle')"
           label-for="name"
         >
 
@@ -69,34 +112,34 @@
             id="name"
             v-model="form.name"
             type="text"
-            placeholder="Example: Treasures of the Sea"
+            :placeholder="$t('namePl')"
             required
           ></b-form-input>
            <b-form-invalid-feedback :state="nameValidation">
-        Your user ID must be 5-12 characters long.
+        {{$t('nameError')}}
       </b-form-invalid-feedback>
         </b-form-group>
 
-        <b-form-group id="input-group-2" label="Description" label-for="intro">
+        <b-form-group id="input-group-2" :label="$t('description')" label-for="intro">
           <b-form-textarea
             id="intro"
             v-model="form.desc"
-            placeholder="Provide a description for your store. Markdown syntax is supported."
+            :placeholder="$t('descPl')"
             rows="3"
             max-rows="6"
             required
           ></b-form-textarea>
             <b-form-invalid-feedback :state="descValidation">
-        Your user ID must be 5-12 characters long.
+        {{$t('descError')}}
       </b-form-invalid-feedback>
            <b-form-text id="password-help-block">
-            {{form.desc.length}} of 1000 characters used
+            {{form.desc.length}}{{$t('countText')}}
           </b-form-text>
 
         </b-form-group>
 
         <div class="button-group">
-        <b-button class="submit-btn" :disabled="submitting" type="submit" variant="primary" size="lg">Submit</b-button>
+        <b-button class="submit-btn" :disabled="submitting" type="submit" variant="primary" size="lg">{{$t('submit')}}</b-button>
 
         </div>
       </b-form>

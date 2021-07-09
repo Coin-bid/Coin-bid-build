@@ -1,9 +1,21 @@
+<i18n>
+{
+  "en": {
+    "works": "User Art Works",
+    "viewMore": "View More"
+  },
+  "zh": {
+    "works": "用户艺术作品",
+    "viewMore": "查看更多"
+  }
+}
+</i18n>
 <template>
   <b-container fluid="lg" class="my-works">
     <div class="list" :no-gutters="true">
       <div class="first-col" >
         <div class="first-card">
-          User Art Works
+         {{$t('works')}}
         </div>
         <div class="work-card">
           <div class="img-wrapper">
@@ -12,10 +24,10 @@
          <div class="info">
           <div class="name">
             <span>维也纳是美丽的城市</span>
-            <span>$ 0.05</span>
+            <span>200USDT</span>
           </div>
           <div class="name-sub">
-            <span>Daily output：568CBD</span>
+            <span>Daily output：1CBD</span>
             <span>an hours left</span>
           </div>
          </div>
@@ -29,10 +41,10 @@
           <div class="info">
             <div class="name">
               <span>维也纳是美丽的城市</span>
-              <span>$ 0.05</span>
+              <span>200USDT</span>
             </div>
             <div class="name-sub">
-              <span>Daily output：568CBD</span>
+              <span>Daily output：1CBD</span>
               <span>an hours left</span>
             </div>
           </div>
@@ -44,10 +56,10 @@
            <div class="info">
             <div class="name">
               <span>维也纳是美丽的城市</span>
-              <span>$ 0.05</span>
+              <span>200USDT</span>
             </div>
             <div class="name-sub">
-              <span>Daily output：568CBD</span>
+              <span>Daily output：1CBD</span>
               <span>an hours left</span>
             </div>
           </div>
@@ -61,16 +73,16 @@
           <div class="info">
             <div class="name">
               <span>维也纳是美丽的城市</span>
-              <span>$ 0.05</span>
+              <span>200USDT</span>
             </div>
             <div class="name-sub">
-              <span>Daily output：568CBD</span>
+              <span>Daily output：1CBD</span>
               <span>an hours left</span>
             </div>
           </div>
         </div>
         <div class="last-card">
-          <b-button variant="primary" @click="$router.push('/auction/user')">View More</b-button>
+          <b-button variant="primary" @click="$router.push('/auction/user')">{{$t('viewMore')}}</b-button>
         </div>
       </div>
     </div>

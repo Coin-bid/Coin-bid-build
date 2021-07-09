@@ -1,18 +1,15 @@
 /* eslint-disable no-param-reassign */
-// import {
-//   login,
-//   logout,
-//   getUser,
-// } from '@/api/login';
-// import { removeToken, setToken } from '@/common/auth';
-// import Cookies from 'js-cookie';
+import { coinBidContract, USDTContract, provider } from '@/eth/ethereum';
+
+const isMetamask = !!window.ethereum;
 
 const user = {
   // namespaced: true,
   state: {
     address: '',
     chainId: '',
-    isMetamask: false,
+    isMetamask,
+    loaded: !isMetamask,
   },
 
   mutations: {
@@ -23,25 +20,24 @@ const user = {
       Object.assign(state, {
         address: '',
         chainId: '',
-        isMetamask: false,
       });
     },
   },
 
   actions: {
-    async handleAccountsChanged({ commit }, accounts) {
+    async handleAccountsChanged({ commit, dispatch, state }, accounts) {
       if (accounts.length === 0) {
         // MetaMask is locked or the user has not connected any accounts
         console.log('Please connect to MetaMask.');
-      } else if (accounts[0] !== this.address) {
+      } else if (accounts[0] !== state.address) {
         const chainId = await window.ethereum.request({ method: 'eth_chainId' });
         commit('UPDATE_STATE', {
           address: accounts[0],
           chainId,
+          loaded: true,
         });
-        // Do any other work!
+        dispatch('getBalances');
       }
-      console.log(this);
     },
 
     unlockByMetaMask({ dispatch }) {
@@ -64,6 +60,36 @@ const user = {
           }
         });
     },
+
+    async getBalances({ commit, state }) {
+      // console.log(coinBidContract, this.user.address)
+      const [ethBalance, usdtBalance, cbdBalance ] = await Promise.all([
+        provider.getBalance(state.address),
+        USDTContract.balanceOf(state.address),
+        coinBidContract.balanceOf(state.address),
+        // miningContract.earned(this.user.address),
+        // miningContract.dailyEarning(this.user.address),
+      ]);
+      // const earnedBalance = await miningContract.earned(this.user.address);
+      // const ethBalance = await provider.getBalance(this.user.address);
+      // const cbdBalance = await coinBidContract.balanceOf(this.user.address);
+      // const usdtBalance = await USDTContract.balanceOf(this.user.address);
+
+      // this.ethBalance = ethBalance;
+      // this.usdtBalance = usdtBalance;
+      // this.cbdBalance = cbdBalance;
+      // this.earnedBalance = earnedBalance;
+      // this.dailyEarning = dailyEarning;
+
+      commit('UPDATE_STATE', {
+        ethBalance,
+        usdtBalance,
+        cbdBalance,
+        // earnedBalance,
+        // dailyEarning,
+      })
+    },
+
     // 获取用户信息
     // async GetUserInfo({ state, commit }) {
     //   const response = await getUser(state.token);

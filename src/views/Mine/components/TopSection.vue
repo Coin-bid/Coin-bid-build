@@ -1,3 +1,14 @@
+<i18n>
+{
+  "en": {
+    "address": "Address"
+  },
+  "zh": {
+    "address": "地址"
+  }
+}
+</i18n>
+
 <template>
   <div class="top-section">
     <div class="bg-bar">
@@ -7,21 +18,49 @@
       <img src="../img/avatar@2x.png" alt="">
       </div>
       <!-- <div class="name">Mr. Alain Cartwright</div> -->
-      <div class="address">
-        地址：{{address}}
-        <img class="copy" src="../img/copy@2x.png" alt="">
+      <div class="address"
+
+      >
+        {{$t("address")}}：{{address}}
+        <img class="copy" src="../img/copy@2x.png" alt=""
+        :data-clipboard-text="address"
+        >
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import ClipboardJS from 'clipboard';
+
 export default {
   props: {
     address: {
       type: String,
       default: '',
     },
+  },
+
+  created() {
+    const clipboard = new ClipboardJS('.copy');
+
+    clipboard.on('success', (e) => {
+      __g_root__.$bvToast.toast('Copy success！', {
+        title: 'Notice',
+        autoHideDelay: 5000,
+      });
+
+      e.clearSelection();
+    });
+
+    // clipboard.on('error', function(e) {
+    //     console.error('Action:', e.action);
+    //     console.error('Trigger:', e.trigger);
+    // });
+  },
+
+  methods: {
+
   },
 };
 </script>

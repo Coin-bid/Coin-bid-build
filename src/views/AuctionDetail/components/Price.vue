@@ -1,7 +1,37 @@
+<i18n>
+{
+  "en": {
+    "countdown": "Countdown of bidding",
+    "price": "Price",
+    "bid": "Bid",
+    "period": "Period of validity",
+    "mined": "Mined",
+    "ownedQuantity": "Owned quantity",
+    "introduce": "Introduce",
+
+    "bidError": "Can not less than last bid price",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+    },
+    "zh": {
+      "countdown": "竞价倒计时",
+      "price": "价格",
+      "bid": "出价",
+      "period": "有效期",
+      "mined": "已产出",
+      "ownedQuantity": "拥有数量",
+      "introduce": "作品介绍",
+
+      "bidError": "不能小于上次竞价价格",
+      "cancel": "取消",
+      "confirm": "确认"
+    }
+}
+</i18n>
 <template>
     <b-container fluid="lg" >
       <div class="price-section">
-        <h4 class="title"><img src="../img/icon-dolar@2x.png" alt=""> Price</h4>
+        <h4 class="title"><img src="../img/icon-dolar@2x.png" alt=""> {{$t('price')}}</h4>
         <div class="price-trend">
           <div class="chart-wrapper">
             <div class="trend-chart">
@@ -26,7 +56,7 @@
                 <img src="../img/icon-time@2x.png" alt="">
 
               </span>
-              <span class="label">Countdown of bidding</span>
+              <span class="label">{{$t('countdown')}}</span>
               <!-- <span class="time-text">2h 25m 24s</span> -->
               <span class="time-text">{{remainTime}}</span>
             </div>
@@ -34,11 +64,11 @@
               <span class="icon">
                 <img src="../img/icon-bid@2x.png" alt="">
               </span>
-              <span class="price-text">${{(auction.lastPrice / 10 ** 6).toFixed(2) || 0}}</span>
+              <span class="price-text">{{(auction.lastPrice / 10 ** 6).toFixed(2) || 0}}USDT</span>
 
               <div class="button-wrapper">
-              <b-button v-if="remainTime === 'end'"  class="buy-btn" variant="primary" size="sm" @click="endAuction">End auction</b-button>
-              <b-button v-else id="popover-reactive-1" class="buy-btn" variant="primary" size="sm" >Bid</b-button>
+              <!-- <b-button v-if="remainTime === 'end'"  class="buy-btn" variant="primary" size="sm" @click="endAuction">End auction</b-button> -->
+              <b-button id="popover-reactive-1" class="buy-btn" variant="primary" size="sm" >{{$t('bid')}}</b-button>
               <b-popover
                 target="popover-reactive-1"
                 triggers="click"
@@ -54,16 +84,16 @@
                   <b-button @click="onClose" class="close" aria-label="Close">
                     <span class="d-inline-block" aria-hidden="true">&times;</span>
                   </b-button>
-                  Price
+                  {{$t('price')}}
                 </template>
 
                 <div>
                   <b-form-group
-                    label="Price"
+                    :label="$t('price')"
                     label-for="popover-input-1"
                     label-cols="4"
                     :state="pricestate"
-                    invalid-feedback="Can not less than last bid price"
+                    :invalid-feedback="$t('bidError')"
                   >
                     <b-form-input
                       ref="price"
@@ -75,8 +105,8 @@
                   </b-form-group>
 
                   <div class="popover-button-wrapper">
-                    <b-button @click="onClose" class="cancel-btn" size="sm" variant="danger">Cancel</b-button>
-                    <b-button @click="onOk" :disabled="submitting" class="ok-btn" size="sm" variant="primary">Confirm</b-button>
+                    <b-button @click="onClose" class="cancel-btn" size="sm" variant="danger">{{$t('cancel')}}</b-button>
+                    <b-button @click="onOk" :disabled="submitting" class="ok-btn" size="sm" variant="primary">{{$t('confirm')}}</b-button>
                   </div>
                 </div>
               </b-popover>
@@ -91,7 +121,6 @@
 <script>
 import moment from 'moment';
 import config from '@/config';
-import { isNumber } from 'lodash';
 import queryQl from '@/common/queryQl';
 import { BigNumber } from 'ethers';
 import {
@@ -138,6 +167,7 @@ export default {
         },
         yAxis: {
           type: 'value',
+          // name: 'USDT',
         },
         series: {
           smooth: true,

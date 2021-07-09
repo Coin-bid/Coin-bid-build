@@ -1,3 +1,25 @@
+<i18n>
+{
+  "en": {
+    "changeHistory": "Change history",
+    "empty": "No data",
+    "event": "Event",
+    "price": "Price",
+    "bidder": "Bidder",
+    "date": "Date",
+    "bid": "Bid"
+  },
+  "zh": {
+    "changeHistory": "更改历史",
+    "empty": "无数据",
+    "event": "事件",
+    "price": "价格",
+    "bidder": "竞价人",
+    "date": "日期",
+    "bid": "竞价"
+  }
+}
+</i18n>
 <template>
   <b-container fluid="lg" >
     <div class="change-section">
@@ -6,21 +28,22 @@
          <table class="change-table">
            <thead>
              <tr>
-               <th>Event</th>
-               <th>Price</th>
-               <th>Bidder</th>
-               <th>Date</th>
+                 <th>{{$t('event')}}</th>
+               <th>{{$t('price')}}</th>
+               <th>{{$t('bidder')}}</th>
+               <th>{{$t('date')}}</th>
              </tr>
            </thead>
            <tbody>
             <tr v-if="!changeList.length">
               <td colspan="4" class="empty">
-                暂无数据
+                 {{$t('empty')}}
               </td>
             </tr>
             <tr v-for="item in changeList">
-               <td>Bid</td>
-               <td>{{item.bidPrice}}</td>
+               <td>{{$t('bid')}}</td>
+               <!-- <td>{{item.bidPrice}}</td> -->
+               <td>{{item.bidPrice / 10 ** 6}} USDT</td>
                <td>{{item.bidder}}</td>
                <!-- <td>
                  <b-button variant="primary" size="sm">Paid</b-button>

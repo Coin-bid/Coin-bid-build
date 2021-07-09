@@ -1,3 +1,43 @@
+<i18n>
+{
+  "en": {
+    "owner": "Owner",
+    "output": "Daily output of mining",
+    "period": "Period of validity",
+    "mined": "Mined",
+    "ownedQuantity": "Owned quantity",
+    "introduce": "Introduce",
+
+    "endAuction": "End auction",
+    "swap": "Swap",
+    "updatePrice": "Update price",
+    "cancelSwap": "Cancel swap",
+
+    "price": "Price",
+    "pleaseInput": "Please input price",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "zh": {
+    "owner": "所有者",
+    "output": "每日挖矿产出",
+    "period": "有效期",
+    "mined": "已开采",
+    "ownedQuantity": "拥有数量",
+    "introduce": "介绍",
+    "endAuction": "结束拍卖",
+    "swap": "转让",
+    "updatePrice": "更新价格",
+    "cancelSwap": "取消转让",
+
+    "price": "价格",
+    "pleaseInput": "请输入价格",
+    "cancel": "取消",
+    "confirm": "确认"
+  }
+}
+</i18n>
+
 <template>
     <b-container fluid="lg" >
       <div class="introduce">
@@ -9,20 +49,26 @@
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-owner@2x.png" alt="">
-              <span>Owner</span>
+              <span>{{$t('owner')}}</span>
               </div>
-            <div class="info-content">Random_HEX</div>
+            <div class="info-content" v-if="type === 'created' ||  type === 'owned'">
+              {{user.address}}
+            </div>
+            <div class="info-content" v-if="type === 'auction'">
+              {{seller}}
+            </div>
+
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-calendar@2x.png" alt="">
-              <span>Daily output of mining</span></div>
+              <span>{{$t('output')}}</span></div>
             <div class="info-content green">1CBD</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-miner@2x.png" alt="">
-              <span>Mined</span></div>
+              <span>{{$t('mined')}}</span></div>
             <div class="info-content red">0/1000CBD</div>
           </div>
            <!-- <div class="info-row">
@@ -34,11 +80,19 @@
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-intro@2x.png" alt="">
-              <span>introduction of the work</span></div>
+              <span>{{$t('introduce')}}</span></div>
             <div class="info-content">{{NFTDetail.description}}</div>
           </div>
-
-          <div class="button-group">
+          <div class="button-group" v-if="type === 'auction'">
+              <b-button
+              class="buy-btn"
+              size="lg"
+              variant="primary"
+              @click="onEndAuction"
+              :disabled="endLoading"
+            >{{$t('endAuction')}}</b-button>
+          </div>
+          <div class="button-group" v-if="type === 'owned'">
             <b-button
               id="popover-reactive-1"
               class="buy-btn"
@@ -46,13 +100,14 @@
               size="lg"
               :disabled="createLoading"
               v-if="!isInOrder"
-            >Swap</b-button>
+            >{{$t('swap')}}</b-button>
             <b-button
               id="popover-reactive-2"
               class="buy-btn"
               variant="primary" size="lg"
               :disabled="updateLoading"
-            >Update price</b-button>
+              v-if="isInOrder"
+            >{{$t('updatePrice')}}</b-button>
             <b-button
               class="buy-btn"
               size="lg"
@@ -60,7 +115,7 @@
               @click="onCancel"
               :disabled="cancelLoading"
               v-if="isInOrder"
-            >Cancel swap</b-button>
+            >{{$t('cancelSwap')}}</b-button>
 
             <b-popover
               target="popover-reactive-1"
@@ -74,16 +129,16 @@
                 <b-button @click="onSwapClose" class="close" aria-label="Close">
                   <span class="d-inline-block" aria-hidden="true">&times;</span>
                 </b-button>
-                Price
+                {{$t('price')}}
               </template>
 
               <div>
                 <b-form-group
-                  label="Price"
+                  :label="$t('price')"
                   label-for="popover-input-1"
                   label-cols="4"
                   :state="pricestateswap"
-                  invalid-feedback="Please input number"
+                  :invalid-feedback="$t('pleaseInput')"
                 >
                   <b-form-input
                     ref="priceswap"
@@ -95,8 +150,8 @@
                 </b-form-group>
 
                 <div class="popover-button-wrapper">
-                  <b-button @click="onSwapClose" class="cancel-btn" size="sm" variant="danger">Cancel</b-button>
-                  <b-button @click="onCreate" :disabled="createLoading" class="ok-btn" size="sm" variant="primary">Confirm</b-button>
+                  <b-button @click="onSwapClose" class="cancel-btn" size="sm" variant="danger">{{$t('cancel')}}</b-button>
+                  <b-button @click="onCreate" :disabled="createLoading" class="ok-btn" size="sm" variant="primary">{{$t('confirm')}}</b-button>
                 </div>
               </div>
             </b-popover>
@@ -113,7 +168,7 @@
                 <b-button @click="onClose" class="close" aria-label="Close">
                   <span class="d-inline-block" aria-hidden="true">&times;</span>
                 </b-button>
-                Price
+                {{$t('price')}}
               </template>
 
               <div>
@@ -122,7 +177,7 @@
                   label-for="popover-input-1"
                   label-cols="4"
                   :state="pricestate"
-                  invalid-feedback="Please input number"
+                  :invalid-feedback="$t('inputPrice')"
                 >
                   <b-form-input
                     ref="price"
@@ -134,8 +189,8 @@
                 </b-form-group>
 
                 <div class="popover-button-wrapper">
-                  <b-button @click="onClose" class="cancel-btn" size="sm" variant="danger">Cancel</b-button>
-                  <b-button @click="onUpdate" :disabled="updateLoading" class="ok-btn" size="sm" variant="primary">Confirm</b-button>
+                  <b-button @click="onClose" class="cancel-btn" size="sm" variant="danger">{{$t('cancel')}}</b-button>
+                  <b-button @click="onUpdate" :disabled="updateLoading" class="ok-btn" size="sm" variant="primary">{{$t('confirm')}}</b-button>
                 </div>
               </div>
             </b-popover>
@@ -148,15 +203,22 @@
 
 <script>
 import config from "@/config";
+import { mapState } from 'vuex';
 import {
-  NFTSwapContract, NFTSwapInterface, provider,
+  NFTAuctionContract, NFTAuctionInterface, USDTContract, USDTInterface, provider,
 } from '@/eth/ethereum';
 import sendTransaction from '@/common/sendTransaction';
 
 export default {
   props: ['NFTDetail', 'isInOrder'],
+
   data() {
+    const { type, seller } = this.$route.query;
+
     return {
+      type,
+
+      seller,
       popoverShowSwap: false,
       popoverShow: false,
 
@@ -165,18 +227,59 @@ export default {
 
       price: 0,
       pricestate: null,
-
+      endLoading: false,
       createLoading: false,
       cancelLoading: false,
       updateLoading: false,
       // NFTDetail: {},
     };
   },
+  computed: {
+    ...mapState({
+      user: (state) => state.user,
+    })
+  },
   created() {
     // this.getDetail();
   },
 
   methods: {
+
+    async onEndAuction() {
+      const { tokenId } = this.$route.query;
+
+      this.endLoading = true;
+      try {
+         const auctionEndTxHash = await sendTransaction({
+          to: config.NFTAuction,
+          gas: 960000,
+          data: NFTAuctionInterface.encodeFunctionData('auctionEnd', [
+            tokenId,
+          ]),
+        });
+        const auctionEndTx = await provider.waitForTransaction(auctionEndTxHash);
+
+         if (auctionEndTx.status === 1) {
+          __g_root__.$bvToast.toast('End bid success, you owned the works', {
+            title: 'Tips',
+            variant: 'success',
+            autoHideDelay: 5000,
+          });
+        } else {
+          __g_root__.$bvToast.toast('End bid fail, please retry', {
+            title: 'Tips',
+            variant: 'danger',
+            autoHideDelay: 5000,
+          });
+        }
+      } catch (error) {
+        console.error(error)
+      }
+      this.endLoading = false;
+
+
+
+    },
 
     onClose() {
       this.popoverShow = false;
@@ -385,6 +488,13 @@ export default {
   .cancel-btn {
     width: 64px;
   }
+}
+
+.info-content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 @media (max-width: 992px) {

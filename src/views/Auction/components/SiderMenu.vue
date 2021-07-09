@@ -1,3 +1,17 @@
+<i18n>
+{
+  "en": {
+    "auction": "Auction works",
+    "transfer": "Transfer of works"
+
+  },
+  "zh": {
+    "auction": "拍卖作品",
+    "transfer": "转让作品"
+  }
+}
+</i18n>
+
 <template>
   <div class="sider-menu">
     <!-- eslint-disable-next-line vue/require-v-for-key -->
@@ -33,14 +47,14 @@ export default {
         // },
 
         {
-          label: 'Auction works',
+          label: this.$t("auction"),
           path: '/auction/works',
           icon: require('../img/icon-works-active@2x.png'),
           aIcon: require('../img/icon-works@2x.png'),
           active: this.$route.path === '/auction/works',
         },
         {
-          label: 'Transfer of works',
+          label: this.$t("transfer"),
           path: '/auction/user',
           icon: require('../img/icon-user-active@2x.png'),
           aIcon: require('../img/icon-user@2x.png'),

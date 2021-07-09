@@ -1,3 +1,23 @@
+<i18n>
+{
+  "en": {
+    "home": "Home",
+    "auction": "Auction",
+    "governance": "Governance",
+    "introduce": "Introduce",
+    "signUp": "登录",
+    "whitePaper": "White Paper"
+  },
+  "zh": {
+    "home": "首页",
+    "auction": "拍卖",
+    "governance": "治理",
+    "introduce": "介绍",
+    "signUp": "登录",
+    "whitePaper": "白皮书"
+  }
+}
+</i18n>
 <template>
   <b-navbar
     class="navbar"
@@ -19,11 +39,11 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item :active="$route.path === '/'"  @click="$router.push('/')">Home</b-nav-item>
-          <b-nav-item :active="$route.path.startsWith('/auction')" @click="$router.push('/auction')">Auction</b-nav-item>
-          <b-nav-item :active="$route.path.startsWith('/governance')"  @click="onClickGovernance">Governance</b-nav-item>
+          <b-nav-item :active="$route.path === '/'"  @click="$router.push('/')">{{$t('home')}}</b-nav-item>
+          <b-nav-item :active="$route.path.startsWith('/auction')" @click="$router.push('/auction')">{{$t('auction')}}</b-nav-item>
+          <b-nav-item :active="$route.path.startsWith('/governance')"  @click="onClickGovernance">{{$t('governance')}}</b-nav-item>
           <!-- <b-nav-item href="/blog">Blog</b-nav-item> -->
-          <b-nav-item :active="$route.path.startsWith('/introduce')" @click="$router.push('/introduce')">Introduce</b-nav-item>
+          <b-nav-item :active="$route.path.startsWith('/introduce')" @click="$router.push('/introduce')">{{$t('introduce')}}</b-nav-item>
         </b-navbar-nav>
 
         <!-- Right aligned nav items -->
@@ -33,9 +53,9 @@
             <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
           </b-nav-form> -->
 
-          <b-nav-item-dropdown text="English" right>
-            <b-dropdown-item href="#">English</b-dropdown-item>
-            <b-dropdown-item href="#">Chinese</b-dropdown-item>
+          <b-nav-item-dropdown :text="langText" right>
+            <b-dropdown-item href="#" @click="changeLang('en')">English</b-dropdown-item>
+            <b-dropdown-item href="#" @click="changeLang('zh')">简体中文</b-dropdown-item>
           </b-nav-item-dropdown>
           <!-- <b-button class="lang-switch" variant="link">English</b-button> -->
             <b-button
@@ -54,7 +74,7 @@
               @click="unlock"
             >
               <img src="@/assets/img/icon-user@2x.png" alt="">
-            Sign Up</b-button>
+            {{$t('signUp')}}</b-button>
 
           <b-button
             size="sm"
@@ -64,7 +84,7 @@
             href="https://gateway.pinata.cloud/ipfs/QmY7SefA5JGuy2AJC8jdhQkNt2AKmBkse5bk5cpp9Xmgk1/COIN%20BID%20English%20version.pdf"
           >
             <img src="@/assets/img/icon-baipishu@2x.png" alt="">
-          White Paper</b-button>
+          {{$t('whitePaper')}}</b-button>
 
 
           <!-- <b-nav-item-dropdown right>
@@ -82,7 +102,7 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-
+import { setLang, getLang } from "@/common/lang"
 
 export default {
   filters: {
@@ -92,6 +112,7 @@ export default {
   },
   data() {
     return {
+      lang: getLang(),
       atTop: true,
       expand: false,
 
@@ -101,6 +122,13 @@ export default {
     ...mapState(['user']),
     isHome() {
       return this.$route.path === '/';
+    },
+    langText() {
+      const langMap = {
+        zh: '简体中文',
+        en: 'English',
+      }
+      return langMap[this.lang];
     }
   },
   mounted() {
@@ -116,6 +144,10 @@ export default {
   methods: {
     onToggleClick() {
       this.expand = !this.expand;
+    },
+    changeLang(lang) {
+      setLang(lang);
+      location.reload();
     },
     ...mapActions(['showComingSoon']),
 

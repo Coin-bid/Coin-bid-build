@@ -1,21 +1,62 @@
+<i18n>
+{
+  "en": {
+    "COMPANY": "COMPANY",
+    "aboutUs": "About Us",
+    "team": "Team",
+    "helpCenter": "Help Center",
+    "suggestions": "Suggestions",
+    "voting": "Voting",
+
+    "MEDIALINK": "MEDIA LINK",
+
+    "LEGAL": "LEGAL",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "security": "Security",
+
+    "blog": "Blog Coin Bid",
+    "writeEmail": "Write email to us in",
+    "mailUs": "Mail to us",
+    "copyright": "© Copyright 2021 Coin Bid Capital Pty Ltd (ABN 45 4545 88888)."
+  },
+  "zh": {
+    "COMPANY": "公司",
+    "aboutUs": "关于我们",
+    "team": "团队",
+    "helpCenter": "帮助中心",
+    "suggestions": "建议",
+    "voting": "投票",
+    "MEDIALINK": "媒体链接",
+    "LEGAL": "法律",
+    "privacy": "隐私",
+    "terms": "条款",
+    "security": "安全",
+    "blog": "Coin Bid博客",
+    "writeEmail": "给我们写电子邮件",
+    "mailUs": "邮寄给我们",
+    "copyright": "©版权所有2021 Coin Bid Capital Pty Ltd（ABN 45 4545 88888）。"
+  }
+}
+</i18n>
 <template>
   <div class="footer">
     <b-container fluid="lg">
       <b-row class="contact-bar" >
         <b-col class="contact-col" cols="4" lg="2">
-          <h5>COMPANY</h5>
-          <a target="_blank" href="">About Us</a>
+          <h5>{{$t('COMPANY')}}</h5>
+          <a target="_blank" href="">{{$t('aboutUs')}}</a>
           <br>
-          <a target="_blank" href="">Team</a>
+          <a target="_blank" href="">{{$t('team')}}</a>
           <br>
-          <a target="_blank" href="">Help Center</a>
+          <a target="_blank" href="">{{$t('helpCenter')}}</a>
           <br>
-          <a target="_blank" href="">Suggestions</a>
+          <a target="_blank" href="">{{$t('suggestions')}}</a>
           <br>
-          <a target="_blank" href="">Voting</a>
+          <a target="_blank" href="">{{$t('voting')}}</a>
         </b-col>
         <b-col class="contact-col"  cols="4" lg="2">
-          <h5>MEDIA LINK</h5>
+          <h5>{{$t('MEDIALINK')}}</h5>
           <a target="_blank" href="https://twitter.com/CoinBid1">Twitter</a>
           <br>
           <a target="_blank" href="https://www.facebook.com/CoinBidNFT.io">Facebook</a>
@@ -28,21 +69,21 @@
           <a target="_blank" href="https://discord.gg/RdNrCRcKdm">Discord</a>
         </b-col>
         <b-col class="contact-col"  cols="4" lg="2">
-          <h5>LEGAL</h5>
-          <a href="">Privacy</a>
+          <h5>{{$t('LEGAL')}}</h5>
+          <a href="">{{$t('privacy')}}</a>
           <br>
-          <a href="">Terms</a>
+          <a href="">{{$t('terms')}}</a>
           <br>
-          <a href="">Security</a>
+          <a href="">{{$t('security')}}</a>
         </b-col>
         <b-col cols="12"  lg="4" class="blog-card-container  ml-auto">
           <div class="blog-card">
-            <h4 class="title">Blog Coin Bid</h4>
-            <div class="label">Write email to us in</div>
+            <h4 class="title">{{$t('blog')}}</h4>
+            <div class="label">{{$t('writeEmail')}}</div>
             <div class="email">contact@coin-bid.io</div>
             <b-button class="sign-btn" variant="primary" size="lg">
               <img src="@/assets/img/icon-user@2x.png" alt="">
-              Mail to us</b-button>
+             {{$t("mailUs")}}</b-button>
           </div>
         </b-col>
       </b-row>
@@ -52,7 +93,7 @@
           <img class="logo" src="@/assets/img/logo@2x.png" alt="">
         </b-col>
         <b-col cols="12"  lg="6">
-          <div class="copy">© Copyright 2021 Coin Bid Capital Pty Ltd (ABN 45 4545 88888).</div>
+          <div class="copy">{{$t('copyright')}}</div>
         </b-col>
       </b-row>
     </b-container>

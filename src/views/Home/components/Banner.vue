@@ -1,3 +1,18 @@
+<i18n>
+{
+  "en": {
+    "discover": "Discover, collect,and sell extraordinary NFTs",
+    "content": "Coin Bid The world’s first and largest digital marketplace for crypto collectibles and non-fungible tokens (NFTs). Buy, sell, and discover exclusive digital assets.",
+    "explore": "Explore"
+  },
+  "zh": {
+    "discover": "发现、收集和销售非凡的 NFT",
+    "content": "Coin Bid 世界上第一个也是最大的加密收藏品和不可替代代币 (NFT) 的数字市场。购买、出售和发现独家数字资产。",
+    "explore": "探索"
+  }
+}
+</i18n>
+
 <template>
   <div class="banner">
     <div class="bg">
@@ -6,10 +21,10 @@
     <b-container fluid="lg">
       <div class="left-content">
         <h3 >
-          Discover, collect,and sell extraordinary NFTs
+         {{ $t('discover') }}
         </h3>
-        <div class="content">Coin Bid The world’s first and largest digital marketplace for crypto collectibles and non-fungible tokens (NFTs). Buy, sell, and discover exclusive digital assets.</div>
-        <b-button variant="primary" size="lg" @click="$router.push('/auction')">Explore</b-button>
+        <div class="content">{{$t('content')}}</div>
+        <b-button variant="primary" size="lg" @click="$router.push('/auction')">{{$t('explore')}}</b-button>
       </div>
     </b-container>
   </div>

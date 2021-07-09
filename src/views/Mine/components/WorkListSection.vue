@@ -1,3 +1,20 @@
+<i18n>
+{
+  "en": {
+    "noWorks": "No works",
+    "owned": "My owned",
+    "created": "Created by me",
+    "auction": "My bided auction"
+  },
+  "zh": {
+  "noWorks": "暂无作品",
+  "owned": "我的拥有",
+  "created": "由我创建",
+  "auction": "我的出价拍卖"
+}
+}
+</i18n>
+
 <template>
   <b-container fluid="lg" >
 
@@ -31,7 +48,7 @@
     </div> -->
 
     <div class="section-one">
-      <h2  class="section-title">Works I own
+      <h2  class="section-title">{{$t('owned')}}
         <!-- <span class="more">查看更多 >></span> -->
       </h2>
       <div>
@@ -51,11 +68,12 @@
             >
               <WorkCard class="work-card"
                 :item="item"
+                type="owned"
               />
             </b-col>
           </template>
           <b-col v-else class="empty-list">
-            No works
+            {{$t('noWorks')}}
           </b-col>
           </b-row>
 
@@ -63,16 +81,16 @@
     </div>
 
     <div class="section-one">
-      <h2  class="section-title">My works
+      <h2  class="section-title">{{$t('created')}}
         <!-- <span class="more">查看更多 >></span> -->
       </h2>
       <div>
         <b-row
           class="work-list"
         >
-          <template v-if="myCreations.length">
+          <template v-if="myWorks.length">
             <b-col
-              v-for="(item, idx) in myCreations"
+              v-for="(item, idx) in myWorks"
               :key="idx"
               class="work-col"
               span="12"
@@ -83,11 +101,45 @@
             >
               <WorkCard class="work-card"
                 :item="item"
+                type="created"
               />
             </b-col>
           </template>
           <b-col v-else class="empty-list">
-            No works
+            {{$t('noWorks')}}
+          </b-col>
+        </b-row>
+      </div>
+    </div>
+
+
+    <div class="section-one">
+      <h2  class="section-title">{{$t('auction')}}
+        <!-- <span class="more">查看更多 >></span> -->
+      </h2>
+      <div>
+        <b-row
+          class="work-list"
+        >
+          <template v-if="myAuctionList.length">
+            <b-col
+              v-for="(item, idx) in myAuctionList"
+              :key="idx"
+              class="work-col"
+              span="12"
+              sm="6"
+              md="6"
+              lg="4"
+              xl="3"
+            >
+              <WorkCard class="work-card"
+                :item="item"
+                type="auction"
+              />
+            </b-col>
+          </template>
+          <b-col v-else class="empty-list">
+            {{$t('noWorks')}}
           </b-col>
         </b-row>
       </div>
@@ -110,7 +162,11 @@ export default {
       type: Array,
       default: () => [],
     },
-    myCreations: {
+    myWorks: {
+      type: Array,
+      default: () => [],
+    },
+    myAuctionList: {
       type: Array,
       default: () => [],
     },

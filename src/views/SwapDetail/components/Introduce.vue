@@ -1,3 +1,46 @@
+<i18n>
+{
+  "en": {
+    "owner": "Owner",
+    "output": "Daily output of mining",
+    "period": "Period of validity",
+    "mined": "Mined",
+    "ownedQuantity": "Owned quantity",
+    "introduce": "Introduce",
+    "buy": "Buy",
+
+    "endAuction": "End auction",
+    "swap": "Swap",
+    "updatePrice": "Update price",
+    "cancelSwap": "Cancel swap",
+
+    "price": "Price",
+    "pleaseInput": "Please input price",
+    "cancel": "Cancel",
+    "confirm": "Confirm"
+  },
+  "zh": {
+    "owner": "所有者",
+    "output": "每日挖矿产出",
+    "period": "有效期",
+    "mined": "已开采",
+    "ownedQuantity": "拥有数量",
+    "introduce": "介绍",
+    "buy": "购买",
+
+    "endAuction": "结束拍卖",
+    "swap": "转让",
+    "updatePrice": "更新价格",
+    "cancelSwap": "取消转让",
+
+    "price": "价格",
+    "pleaseInput": "请输入价格",
+    "cancel": "取消",
+    "confirm": "确认"
+  }
+}
+</i18n>
+
 <template>
     <b-container fluid="lg" >
       <div class="introduce">
@@ -9,37 +52,37 @@
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-owner@2x.png" alt="">
-              <span>Owner</span>
+              <span>{{$t('owner')}}</span>
               </div>
-            <div class="info-content">Random_HEX</div>
+            <div class="info-content">{{seller | trimAddress}}</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-calendar@2x.png" alt="">
-              <span>Daily output of mining</span></div>
+              <span>{{$t('output')}}</span></div>
             <div class="info-content green">1CBD</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-miner@2x.png" alt="">
-              <span>Mined</span></div>
-            <div class="info-content red">0/1000CBD</div>
+              <span>{{$t('mined')}}</span></div>
+            <div class="info-content red">{{Math.floor(miningInfo.remainingAmout / 10 ** 18)}}/1000CBD</div>
           </div>
-          <!-- <div class="info-row">
+          <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-miner@2x.png" alt="">
-              <span>Price</span></div>
-            <div class="info-content red">200 $</div>
-          </div> -->
+              <span>{{$t('price')}}</span></div>
+            <div class="info-content red">{{Math.floor(price / 10 ** 6) || 0}}USDT</div>
+          </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-intro@2x.png" alt="">
-              <span>introduction of the work</span></div>
+              <span>{{$t('introduce')}}</span></div>
             <div class="info-content">{{NFTDetail.description}}</div>
           </div>
 
           <div class="button-group">
-            <b-button class="buy-btn" variant="primary" size="lg" @click="onBuy">Buy</b-button>
+            <b-button class="buy-btn" variant="primary" size="lg" @click="onBuy">{{$t('buy')}}</b-button>
             <!-- <b-button class="buy-btn" variant="primary" size="lg" @click="onCancel">取消订单</b-button>
             <b-button class="buy-btn" variant="primary" size="lg" @click="onUpdate">更新价格</b-button>
             <b-button class="buy-btn" variant="primary" size="lg" @click="onDelete">删除订单</b-button> -->
@@ -50,17 +93,20 @@
 </template>
 
 <script>
-import config from "@/config";
+import { mapState } from 'vuex';
+import config from '@/config';
+//   NFTAuctionContract, NFTAuctionInterface, USDTContract, USDTInterface, provider,
+import { BigNumber } from 'ethers';
 import {
-  NFTSwapContract, NFTSwapInterface, provider,
+  USDTContract, USDTInterface, NFTSwapInterface, provider,
 } from '@/eth/ethereum';
 import sendTransaction from '@/common/sendTransaction';
 
 export default {
-  props: ['NFTDetail'],
+  props: ['NFTDetail', 'price', 'seller', 'miningInfo'],
   data() {
     return {
-      price: 200,
+      // price: 200,
       // NFTDetail: {},
     };
   },
@@ -68,34 +114,106 @@ export default {
     // this.getDetail();
   },
 
+  computed: {
+    ...mapState({
+      user: (state) => state.user,
+    }),
+  },
+
   methods: {
     async onBuy() {
       const { tokenId } = this.$route.query;
-      // console.log( tokenId);
-      // const realPrice = this.price * 10 ** 6;
-      const buyTxHash = await sendTransaction({
-        to: config.NFTSwap,
-        gas: 960000,
-        data: NFTSwapInterface.encodeFunctionData('buy', [
-          tokenId
-        ]),
-      });
+      const realPrice = this.price;
 
-      const buyTx = await provider.waitForTransaction(buyTxHash);
-
-      if (buyTx.status === 1) {
-        __g_root__.$bvToast.toast('Buy success', {
-          title: 'Tips',
-          variant: 'success',
-          autoHideDelay: 5000,
-        });
-      } else {
-        __g_root__.$bvToast.toast('Buy fail, please retry', {
+      if (!this.user.address) {
+        __g_root__.$bvToast.toast('Please connect metamask', {
           title: 'Tips',
           variant: 'danger',
           autoHideDelay: 5000,
         });
+        return false;
       }
+
+      console.log(this.user.address);
+      console.log(this.seller);
+      if (this.user.address.toLowerCase() === this.seller.toLowerCase()) {
+        __g_root__.$bvToast.toast('You\'re already the owner', {
+          title: 'Tips',
+          variant: 'danger',
+          autoHideDelay: 5000,
+        });
+        return false;
+      }
+
+      const usdtBalance = await USDTContract.balanceOf(this.user.address);
+
+      if (usdtBalance.lt(this.price)) {
+        __g_root__.$bvToast.toast('You balance is not enough', {
+          title: 'Tips',
+          variant: 'danger',
+          autoHideDelay: 5000,
+        });
+        return false;
+      }
+
+      this.submitting = true;
+
+      try {
+        const allowance = await USDTContract.allowance(
+          ethereum.selectedAddress,
+          config.NFTSwap,
+        );
+
+        if (allowance.lt(realPrice)) {
+          const approveTxHash = await sendTransaction({
+            to: config.USDTContract,
+            data: USDTInterface.encodeFunctionData('approve', [
+              config.NFTSwap,
+              BigNumber.from('9'.repeat(32)).toHexString(),
+            ]),
+          });
+
+          const approveTx = await provider.waitForTransaction(approveTxHash);
+
+          if (approveTx.status !== 1) {
+            __g_root__.$bvToast.toast('Approve fail，please retry', {
+              title: 'Tips',
+              variant: 'danger',
+              autoHideDelay: 5000,
+            });
+            this.submitting = false;
+            return;
+          }
+          console.log(approveTx);
+        }
+
+        const buyTxHash = await sendTransaction({
+          to: config.NFTSwap,
+          gas: 960000,
+          data: NFTSwapInterface.encodeFunctionData('buy', [
+            tokenId,
+          ]),
+        });
+
+        const buyTx = await provider.waitForTransaction(buyTxHash);
+
+        if (buyTx.status === 1) {
+          __g_root__.$bvToast.toast('Buy success', {
+            title: 'Tips',
+            variant: 'success',
+            autoHideDelay: 5000,
+          });
+        } else {
+          __g_root__.$bvToast.toast('Buy fail, please retry', {
+            title: 'Tips',
+            variant: 'danger',
+            autoHideDelay: 5000,
+          });
+        }
+      } catch (error) {
+        console.error(error);
+      }
+      this.submitting = false;
     },
     onCancel() {
 

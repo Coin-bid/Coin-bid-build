@@ -20,7 +20,7 @@
             </tr>
             <tr v-for="item in changeList">
                <td>Bid</td>
-               <td>{{item.bidPrice}}</td>
+               <td>{{item.bidPrice / 10 ** 6}}USDT</td>
                <td>{{item.bidder}}</td>
                <!-- <td>
                  <b-button variant="primary" size="sm">Paid</b-button>
