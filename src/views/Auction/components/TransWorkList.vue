@@ -240,7 +240,9 @@ export default {
 }
 
 @media (max-width: 540px) {
-
+  .work-list {
+    margin-left: 0;
+  }
   .condition-bar {
     flex-direction: column;
     align-items: start;

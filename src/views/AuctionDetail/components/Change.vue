@@ -23,7 +23,7 @@
 <template>
   <b-container fluid="lg" >
     <div class="change-section">
-      <h4 class="title"><img src="../img/icon-dolar@2x.png" alt=""> Change history</h4>
+      <h4 class="title"><img src="../img/icon-dolar@2x.png" alt=""> {{$t('changeHistory')}}</h4>
       <div class="change-detail">
          <table class="change-table">
            <thead>

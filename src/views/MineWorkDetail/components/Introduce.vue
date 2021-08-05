@@ -16,7 +16,17 @@
     "price": "Price",
     "pleaseInput": "Please input price",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+
+    "endbidSuccess": "End bid success, you owned the works",
+    "endbidFail": "End bid fail, please retry",
+    "createSuccess": "Create success",
+    "createFail": "Create fail, please retry",
+    "cancelSuccess": "Cancel success",
+    "cancelFail": "Cancel fail, please retry",
+    "updateSuccess": "Update success",
+    "updateFail": "Update fail, please retry"
+
   },
   "zh": {
     "owner": "所有者",
@@ -33,7 +43,16 @@
     "price": "价格",
     "pleaseInput": "请输入价格",
     "cancel": "取消",
-    "confirm": "确认"
+    "confirm": "确认",
+
+    "endbidSuccess": "竞价成功，你将获得作品",
+    "endbidFail": "结束竞价失败，请重试",
+    "createSuccess": "创建成功",
+    "createFail": "创建失败，请重试",
+    "cancelSuccess": "取消成功",
+    "cancelFail": "取消失败，请重试",
+    "updateSuccess": "取消成功",
+    "updateFail": "取消失败，请重试"
   }
 }
 </i18n>
@@ -244,7 +263,14 @@ export default {
   },
 
   methods: {
-
+  // "endbidSuccess": "竞价成功，你将获得作品",
+  //   "endbidFail": "结束竞价失败，请重试",
+  //   "createSuccess": "创建成功",
+  //   "createFail": "创建失败，请重试",
+  //   "cancelSuccess": "取消成功",
+  //   "cancelFail": "取消失败，请重试",
+  //   "updateSuccess": "取消成功",
+  //   "updateFail": "取消失败，请重试"
     async onEndAuction() {
       const { tokenId } = this.$route.query;
 
@@ -260,14 +286,14 @@ export default {
         const auctionEndTx = await provider.waitForTransaction(auctionEndTxHash);
 
          if (auctionEndTx.status === 1) {
-          __g_root__.$bvToast.toast('End bid success, you owned the works', {
-            title: 'Tips',
+          __g_root__.$bvToast.toast(this.$('endbidSuccess'), {
+            title: this.$t('tip'),
             variant: 'success',
             autoHideDelay: 5000,
           });
         } else {
-          __g_root__.$bvToast.toast('End bid fail, please retry', {
-            title: 'Tips',
+          __g_root__.$bvToast.toast(this.$('endbidFail'), {
+            title: this.$t('tip'),
             variant: 'danger',
             autoHideDelay: 5000,
           });
@@ -310,14 +336,14 @@ export default {
       const createTx = await provider.waitForTransaction(createTxHash);
       this.createLoading = false;
       if (createTx.status === 1) {
-        __g_root__.$bvToast.toast('Create success', {
-          title: 'Tips',
+        __g_root__.$bvToast.toast(this.$('createSuccess'), {
+          title: this.$t('tip'),
           variant: 'success',
           autoHideDelay: 5000,
         });
       } else {
-        __g_root__.$bvToast.toast('Create fail, please retry', {
-          title: 'Tips',
+        __g_root__.$bvToast.toast(this.$('createFail'), {
+          title: this.$t('tip'),
           variant: 'danger',
           autoHideDelay: 5000,
         });
@@ -337,14 +363,14 @@ export default {
       this.cancelLoading = false;
 
       if (cancelTx.status === 1) {
-        __g_root__.$bvToast.toast('Cancel success', {
-          title: 'Tips',
+        __g_root__.$bvToast.toast(this.$('cancelSuccess'), {
+          title: this.$t('tip'),
           variant: 'success',
           autoHideDelay: 5000,
         });
       } else {
-        __g_root__.$bvToast.toast('Cancel fail, please retry', {
-          title: 'Tips',
+        __g_root__.$bvToast.toast(this.$('cancelFail'), {
+          title: this.$t('tip'),
           variant: 'danger',
           autoHideDelay: 5000,
         });
@@ -376,14 +402,14 @@ export default {
       const updateTx = await provider.waitForTransaction(cupdateTxHash);
 
       if (updateTx.status === 1) {
-        __g_root__.$bvToast.toast('Update success', {
-          title: 'Tips',
+        __g_root__.$bvToast.toast(this.$('updateSuccess'), {
+          title: this.$t('tip'),
           variant: 'success',
           autoHideDelay: 5000,
         });
       } else {
-        __g_root__.$bvToast.toast('Update fail, please retry', {
-          title: 'Tips',
+        __g_root__.$bvToast.toast(this.$('updateFail'), {
+          title: this.$t('tip'),
           variant: 'danger',
           autoHideDelay: 5000,
         });

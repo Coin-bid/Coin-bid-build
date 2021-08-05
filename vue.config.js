@@ -47,10 +47,10 @@ module.exports = {
     }
 
 
-    config.plugins.push(new webpack.IgnorePlugin({
-      resourceRegExp: /^\.\/locale$/,
-      contextRegExp: /moment$/
-    }));
+    // config.plugins.push(new webpack.IgnorePlugin({
+    //   resourceRegExp: /^\.\/locale$/,
+    //   contextRegExp: /moment$/
+    // }));
   },
 
   chainWebpack: config => {

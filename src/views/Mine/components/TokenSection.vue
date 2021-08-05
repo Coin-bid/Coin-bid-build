@@ -1,10 +1,18 @@
 <i18n>
 {
   "en": {
-    "withdraw": "Withdraw"
+    "withdraw": "Withdraw",
+    "totalEarned": "Total earned",
+    "dailyEarned": "Daily earned",
+    "withdrawSuccess": "Withdraw success",
+    "withdrawFail": "Withdraw fail"
   },
   "zh": {
-    "withdraw": "提币"
+    "withdraw": "提币",
+    "totalEarned": "全部产出",
+    "dailyEarned": "日产出",
+    "withdrawSuccess": "提现成功",
+    "withdrawFail": "提现失败"
   }
 }
 </i18n>
@@ -47,7 +55,7 @@
         </div>
         <div class="token-info">
           <div class="count">{{dailyEarning ? (dailyEarning / 1e18).toFixed(2) : 0}}CBD</div>
-          <div class="symbol">Daily earned</div>
+          <div class="symbol">{{$t('dailyEarned')}}</div>
         </div>
       </div>
       <div class="token-item">
@@ -56,7 +64,7 @@
         </div>
         <div class="token-info">
           <div class="count">{{earnedBalance ? (earnedBalance / 1e18).toFixed(2) : 0}}CBD</div>
-          <div class="symbol">Total earned</div>
+          <div class="symbol">{{$t('totalEarned')}}</div>
         </div>
         <b-button class="withdraw-btn" :disabled="claimLoading" variant="primary" size="sm" @click="onClaim">{{$t('withdraw')}}</b-button>
       </div>
@@ -82,9 +90,6 @@ export default {
 
       this.claimLoading = true;
 
-
-      console.log(config.mining)
-      console.log(miningInterface)
       const txHash = await sendTransaction({
         to: config.mining,
         // gas: 960000,
@@ -95,14 +100,14 @@ export default {
       this.claimLoading = false;
 
       if (claimTx.status === 1) {
-        __g_root__.$bvToast.toast('Withdraw success', {
-          title: 'Tips',
+        __g_root__.$bvToast.toast(this.$t('withdrawSuccess'), {
+          title: this.$t('tip'),
           variant: 'success',
           autoHideDelay: 5000,
         });
       } else {
-        __g_root__.$bvToast.toast('Withdraw failed', {
-          title: 'Tips',
+        __g_root__.$bvToast.toast(this.$t('withdrawFail'), {
+          title: this.$t('tip'),
           variant: 'danger',
           autoHideDelay: 5000,
         });

@@ -5,6 +5,9 @@ export default {
   next: '下一步',
   submit: '提交',
 
+  tip: '提示',
+  selectNet: '您的网络不被支持，请选择主网',
+
   formErr: {
     empty: '请填写',
     email: '邮箱格式错误',

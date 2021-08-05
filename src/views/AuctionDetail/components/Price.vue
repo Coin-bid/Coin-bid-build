@@ -11,7 +11,17 @@
 
     "bidError": "Can not less than last bid price",
     "cancel": "Cancel",
-    "confirm": "Confirm"
+    "confirm": "Confirm",
+
+    "end": "End",
+
+
+    "endbidSuccess": "End bid success, you owned the works",
+    "endbidFail": "End bid fail, please retry",
+
+    "approveFail": "Approve fail",
+    "bidSuccess": "Bid success",
+    "bidFail": "Bid fail, please retry"
     },
     "zh": {
       "countdown": "竞价倒计时",
@@ -24,7 +34,14 @@
 
       "bidError": "不能小于上次竞价价格",
       "cancel": "取消",
-      "confirm": "确认"
+      "confirm": "确认",
+      "end": "已结束",
+
+      "endbidSuccess": "结束竞拍成功，你拥有的作品",
+      "endbidFail": "结束竞拍失败，请重试",
+      "approveFail": "授权失败",
+      "bidSuccess": "竞拍成功",
+      "bidFail": "竞拍失败，请重试"
     }
 }
 </i18n>
@@ -58,7 +75,8 @@
               </span>
               <span class="label">{{$t('countdown')}}</span>
               <!-- <span class="time-text">2h 25m 24s</span> -->
-              <span class="time-text">{{remainTime}}</span>
+              <span class="time-text" v-if="remainTime === 'end'">{{$t('end')}}</span>
+              <span class="time-text" v-else>{{remainTime}}</span>
             </div>
             <div class="price">
               <span class="icon">
@@ -244,14 +262,14 @@ export default {
       const auctionEndTx = await provider.waitForTransaction(auctionEndTxHash);
 
        if (auctionEndTx.status === 1) {
-          __g_root__.$bvToast.toast('End bid success, you owned the works', {
-            title: 'Tips',
+          __g_root__.$bvToast.toast(this.$t('endbidSuccess'), {
+            title: this.$t('tip'),
             variant: 'success',
             autoHideDelay: 5000,
           });
         } else {
-          __g_root__.$bvToast.toast('End bid fail, please retry', {
-            title: 'Tips',
+          __g_root__.$bvToast.toast(this.$t('endbidFail'), {
+            title: this.$t('tip'),
             variant: 'danger',
             autoHideDelay: 5000,
           });
@@ -287,8 +305,8 @@ export default {
         const approveTx = await provider.waitForTransaction(approveTxHash);
 
         if (approveTx.status !== 1) {
-          __g_root__.$bvToast.toast('授权失败，请重试', {
-            title: 'Tips',
+          __g_root__.$bvToast.toast(this.$t('approveFail'), {
+            title: this.$t('tip'),
             variant: 'danger',
             autoHideDelay: 5000,
           });
@@ -319,14 +337,14 @@ export default {
         const bidTx = await provider.waitForTransaction(bidTxHash);
 
         if (bidTx.status === 1) {
-          __g_root__.$bvToast.toast('Bid success.', {
-            title: 'Tips',
+          __g_root__.$bvToast.toast(this.$t('bidSuccess'), {
+            title: this.$t('tip'),
             variant: 'success',
             autoHideDelay: 5000,
           });
         } else {
-          __g_root__.$bvToast.toast('Bid fail, please retry.', {
-            title: 'Tips',
+          __g_root__.$bvToast.toast(this.$t('bidFail'), {
+            title: this.$t('tip'),
             variant: 'danger',
             autoHideDelay: 5000,
           });
@@ -356,14 +374,14 @@ export default {
         const bidTx = await provider.waitForTransaction(bidTxHash);
 
         if (bidTx.status === 1) {
-          __g_root__.$bvToast.toast('Bid success.', {
-            title: 'Tips',
+          __g_root__.$bvToast.toast(this.$t('bidSuccess'), {
+            title: this.$t('tip'),
             variant: 'success',
             autoHideDelay: 5000,
           });
         } else {
-          __g_root__.$bvToast.toast('Bid fail, please retry.', {
-            title: 'Tips',
+          __g_root__.$bvToast.toast(this.$t('bidFail'), {
+            title: this.$t('tip'),
             variant: 'danger',
             autoHideDelay: 5000,
           });

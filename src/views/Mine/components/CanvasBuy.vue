@@ -2,6 +2,7 @@
 {
   "en": {
     "price": "Price",
+    "remain": "remaining quantity",
     "output": "Daily output of mining",
     "period": "Period of validity",
     "ownedQuantity": "Owned quantity",
@@ -18,6 +19,7 @@
     },
     "zh": {
       "price": "价格",
+      "remain": "剩余数量",
       "output": "挖矿日产量",
       "period": "有效期",
       "ownedQuantity": "拥有数量",
@@ -48,6 +50,13 @@
               </div>
             <div class="info-content">{{price / 10 ** 18}}CBD</div>
           </div>
+           <div class="info-row">
+            <div class="info-label">
+              <img src="../img/icon-owner@2x.png" alt="">
+              <span>{{$t('remain')}}</span>
+              </div>
+            <div class="info-content">{{leftAmount}}</div>
+          </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-calendar@2x.png" alt="">
@@ -56,7 +65,7 @@
           </div>
           <div class="info-row">
             <div class="info-label">
-              <img src="../img/icon-miner@2x.png" alt="">
+              <img src="../img/icon-calendar@2x.png" alt="">
               <span>{{$t('period')}}</span></div>
             <div class="info-content red">1000 Days</div>
           </div>
@@ -153,6 +162,7 @@ export default {
       price: 0,
       canvasAmount: 0,
 
+      leftAmount: 0,
       submitting: false,
     };
   },
@@ -166,6 +176,7 @@ export default {
   created() {
     this.getPrice();
     this.getAmount();
+    this.getLeftAmount();
     // this.getDetail();
   },
 
@@ -183,8 +194,14 @@ export default {
       this.canvasAmount = canvasAmount;
     },
 
+    async getLeftAmount() {
+      const [ leftAmount ] = await canvasAuctionContract.functions.getAmountLeft();
+
+      this.leftAmount = leftAmount;
+    },
+
     onCreate() {
-      this.$router.push('/collection/create')
+      this.$router.push('/collection/create');
     },
     // async getDetail() {
     //   const { id } = this.$route.params;
@@ -209,11 +226,6 @@ export default {
 
       if (!Number(this.amount)) {
         this.amountstate = false;
-        // __g_root__.$bvToast.toast('请输入整数', {
-        //   title: 'Notice',
-        //   // toaster: 'b-toaster-top-center',
-        //   autoHideDelay: 5000,
-        // });
         return;
       }
 

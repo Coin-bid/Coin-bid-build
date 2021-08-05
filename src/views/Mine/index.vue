@@ -61,7 +61,6 @@ export default {
   },
 
   created() {
-    console.log(this.user)
     this.getBalances();
     this.getMyOwns();
     this.getMines();
@@ -124,7 +123,7 @@ export default {
 
     async getAuctions() {
       const { data } = await queryQl(`{
-        auctionEntities(first: 100, where:{lastBidder: "${this.user.address}", ended: false}) {
+        auctionEntities(first: 100, where:{lastBidder: "${this.user.address}", ended: false, bided: true}) {
           id
           nftId
           creator

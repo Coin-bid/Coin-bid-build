@@ -5,11 +5,19 @@
 </template>
 
 <script>
-// export default {
-//   mounted() {
+import { mapState } from 'vuex';
 
-//   }
-// }
+export default {
+
+  computed: {
+    ...mapState({
+      // user:
+    }),
+  },
+  mounted() {
+
+  },
+}
 </script>
 
 <style lang="scss">

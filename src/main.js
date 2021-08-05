@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import moment from "moment";
 import i18n from '@/i18n';
 import { getLang } from '@/common/lang';
 import * as echarts from 'echarts';
@@ -25,6 +26,9 @@ Vue.use(VueCompositionAPI);
 
 Vue.component('v-charts', VueECharts);
 
+
+
+
 Vue.config.productionTip = false;
 
 window.__g_store__ = store;
@@ -42,6 +46,7 @@ if (window.ethereum) {
   window.ethereum
     .request({ method: 'eth_accounts' })
     .then((accounts) => {
+
       store.dispatch('handleAccountsChanged', accounts);
     })
     .catch((err) => {
@@ -64,6 +69,10 @@ if (['zh', 'en'].includes(lang)) {
   i18n.locale = lang;
 }
 
+if (lang === 'zh') {
+  moment.locale('zh-cn');
+}
+
 // eslint-disable-next-line no-underscore-dangle
 window.__g_root__ = new Vue({
   i18n,
@@ -72,7 +81,4 @@ window.__g_root__ = new Vue({
   render: (h) => h(App),
 }).$mount('#app');
 
-// __g_root__.$bvToast.toast(`提示`, {
-//   title: 'BootstrapVue Toast',
-//   autoHideDelay: 5000,
-// })
+

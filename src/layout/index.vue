@@ -31,6 +31,17 @@ export default {
   created() {
     console.log(this.$bvToast);
     // require('@/initEnums');
+
+    if (window.ethereum) {
+      const { chainId } = window.ethereum;
+
+      if (!(chainId === '0x2a' || chainId === '0x1')) {
+        __g_root__.$bvToast.toast(this.$t('selectNet'), {
+          title: this.$t('tip'),
+          autoHideDelay: 5000,
+        })
+      }
+    }
   },
   methods: {
     // handleClickOutside() {

@@ -28,13 +28,7 @@ export default new Vuex.Store({
 
   },
   actions: {
-    showComingSoon() {
-      __g_root__.$bvToast.toast('Coming soon...', {
-        title: 'Notice',
-        // toaster: 'b-toaster-top-center',
-        autoHideDelay: 5000,
-      });
-    },
+   
   },
 
 });

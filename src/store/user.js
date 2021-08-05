@@ -28,6 +28,12 @@ const user = {
     async handleAccountsChanged({ commit, dispatch, state }, accounts) {
       if (accounts.length === 0) {
         // MetaMask is locked or the user has not connected any accounts
+        const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+        commit('UPDATE_STATE', {
+          // address: accounts[0],
+          chainId,
+          loaded: true,
+        });
         console.log('Please connect to MetaMask.');
       } else if (accounts[0] !== state.address) {
         const chainId = await window.ethereum.request({ method: 'eth_chainId' });

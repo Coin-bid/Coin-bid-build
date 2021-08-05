@@ -1,3 +1,25 @@
+<i18n>
+{
+  "en": {
+    "owner": "Owner",
+    "price": "Price",
+    "output": "Daily output of mining",
+    "period": "Period of validity",
+    "mined": "Mined",
+    "ownedQuantity": "Owned quantity",
+    "introduce": "Introduce"
+    },
+    "zh": {
+      "owner": "拥有者",
+      "price": "价格",
+      "output": "挖矿日产量",
+      "period": "有效期",
+      "mined": "已产出",
+      "ownedQuantity": "拥有数量",
+      "introduce": "作品介绍"
+    }
+}
+</i18n>
 <template>
     <b-container fluid="lg" >
       <div class="introduce">
@@ -9,27 +31,27 @@
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-owner@2x.png" alt="">
-              <span>Owner</span>
+              <span>{{$t('owner')}}</span>
               </div>
             <div class="info-content">Random_HEX</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-calendar@2x.png" alt="">
-              <span>Daily output of mining</span></div>
+              <span>{{$t('output')}}</span></div>
             <div class="info-content green">1CBD</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-miner@2x.png" alt="">
-              <span>Mined</span></div>
+              <span>{{$t('mined')}}</span></div>
             <div class="info-content red">0/1000CBD</div>
           </div>
           <div class="info-row">
             <div class="info-label">
               <img src="../img/icon-intro@2x.png" alt="">
-              <span>introduction of the work</span></div>
-            <div class="info-content">画布</div>
+              <span>{{$t('introduct')}}</span></div>
+            <div class="info-content">Canvas</div>
           </div>
         </div>
       </div>

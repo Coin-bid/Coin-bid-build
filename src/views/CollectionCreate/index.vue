@@ -19,7 +19,10 @@
     "submit": "Submit",
 
     "fieldTitle": "Title",
-    "description": "Description"
+    "description": "Description",
+
+    "createSuccess": "Create success",
+    "createFail": "Create fail"
     },
     "zh": {
       "title": "创建您的作品",
@@ -38,7 +41,10 @@
       "submit": "提交",
 
       "fieldTitle": "标题",
-      "description": "描述"
+      "description": "描述",
+
+      "createSuccess": "创建成功",
+      "createFail": "创建失败"
     }
 }
 </i18n>
@@ -231,14 +237,14 @@ export default {
 
 
        if (creatTx.status === 1) {
-        __g_root__.$bvToast.toast('Create success', {
-          title: 'Tips',
+        __g_root__.$bvToast.toast(this.$t('createSuccess'), {
+          title: this.$t('tip'),
           variant: 'success',
           autoHideDelay: 5000,
         });
       } else {
-        __g_root__.$bvToast.toast('Create fail', {
-          title: 'Tips',
+        __g_root__.$bvToast.toast(this.$t('createFail'), {
+          title: this.$t('tip'),
           variant: 'danger',
           autoHideDelay: 5000,
         });

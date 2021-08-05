@@ -1,10 +1,12 @@
 <i18n>
 {
   "en": {
-    "address": "Address"
+    "address": "Address",
+    "copySuccess": "Copy success！"
   },
   "zh": {
-    "address": "地址"
+    "address": "地址",
+    "copySuccess": "复制成功"
   }
 }
 </i18n>
@@ -45,7 +47,7 @@ export default {
     const clipboard = new ClipboardJS('.copy');
 
     clipboard.on('success', (e) => {
-      __g_root__.$bvToast.toast('Copy success！', {
+      __g_root__.$bvToast.toast(this.$('copySuccess'), {
         title: 'Notice',
         autoHideDelay: 5000,
       });

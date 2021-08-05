@@ -65,7 +65,7 @@
         v-if="id === 2"
       >
         <div class="img-wrapper">
-          <img src="~@/assets/img/artist-pic@2x.png" alt="">
+          <img src="~@/assets/img/artist-pic-2@2x.jpeg" alt="">
         </div>
         <div class="intro">
           <h4 class="name">{{$t("name2")}}</h4>

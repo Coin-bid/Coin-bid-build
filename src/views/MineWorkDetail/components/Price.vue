@@ -214,13 +214,13 @@ export default {
 
        if (auctionEndTx.status === 1) {
           __g_root__.$bvToast.toast('End bid success, you owned the works', {
-            title: 'Tips',
+            title: this.$t('tip'),
             variant: 'success',
             autoHideDelay: 5000,
           });
         } else {
           __g_root__.$bvToast.toast('End bid fail, please retry', {
-            title: 'Tips',
+            title: this.$t('tip'),
             variant: 'danger',
             autoHideDelay: 5000,
           });
@@ -257,7 +257,7 @@ export default {
 
         if (approveTx.status !== 1) {
           __g_root__.$bvToast.toast('授权失败，请重试', {
-            title: 'Tips',
+            title: this.$t('tip'),
             variant: 'danger',
             autoHideDelay: 5000,
           });
@@ -289,13 +289,13 @@ export default {
 
         if (bidTx.status === 1) {
           __g_root__.$bvToast.toast('Bid success.', {
-            title: 'Tips',
+            title: this.$t('tip'),
             variant: 'success',
             autoHideDelay: 5000,
           });
         } else {
           __g_root__.$bvToast.toast('Bid fail, please retry.', {
-            title: 'Tips',
+            title: this.$t('tip'),
             variant: 'danger',
             autoHideDelay: 5000,
           });
@@ -326,13 +326,13 @@ export default {
 
         if (bidTx.status === 1) {
           __g_root__.$bvToast.toast('Bid success.', {
-            title: 'Tips',
+            title: this.$t('tip'),
             variant: 'success',
             autoHideDelay: 5000,
           });
         } else {
           __g_root__.$bvToast.toast('Bid fail, please retry.', {
-            title: 'Tips',
+            title: this.$t('tip'),
             variant: 'danger',
             autoHideDelay: 5000,
           });

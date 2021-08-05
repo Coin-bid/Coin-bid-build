@@ -127,7 +127,7 @@ export default {
 
       if (!this.user.address) {
         __g_root__.$bvToast.toast('Please connect metamask', {
-          title: 'Tips',
+          title: this.$t('tip'),
           variant: 'danger',
           autoHideDelay: 5000,
         });
@@ -138,7 +138,7 @@ export default {
       console.log(this.seller);
       if (this.user.address.toLowerCase() === this.seller.toLowerCase()) {
         __g_root__.$bvToast.toast('You\'re already the owner', {
-          title: 'Tips',
+          title: this.$t('tip'),
           variant: 'danger',
           autoHideDelay: 5000,
         });
@@ -149,7 +149,7 @@ export default {
 
       if (usdtBalance.lt(this.price)) {
         __g_root__.$bvToast.toast('You balance is not enough', {
-          title: 'Tips',
+          title: this.$t('tip'),
           variant: 'danger',
           autoHideDelay: 5000,
         });
@@ -177,7 +177,7 @@ export default {
 
           if (approveTx.status !== 1) {
             __g_root__.$bvToast.toast('Approve fail，please retry', {
-              title: 'Tips',
+              title: this.$t('tip'),
               variant: 'danger',
               autoHideDelay: 5000,
             });
@@ -199,13 +199,13 @@ export default {
 
         if (buyTx.status === 1) {
           __g_root__.$bvToast.toast('Buy success', {
-            title: 'Tips',
+            title: this.$t('tip'),
             variant: 'success',
             autoHideDelay: 5000,
           });
         } else {
           __g_root__.$bvToast.toast('Buy fail, please retry', {
-            title: 'Tips',
+            title: this.$t('tip'),
             variant: 'danger',
             autoHideDelay: 5000,
           });

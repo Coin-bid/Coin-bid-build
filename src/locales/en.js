@@ -5,6 +5,9 @@ export default {
   next: 'Next',
   submit: 'Submit',
 
+  tip: 'Tip',
+  selectNet: 'You network is not supported, please select mainnet',
+
   formErr: {
     empty: 'Please fill out',
     email: 'The email format is not right',

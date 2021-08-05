@@ -159,12 +159,6 @@ export default {
     onClickGovernance() {
       window.open('https://gov.coin-bid.io/#/');
     }
-    // onClick() {
-    //   __g_root__.$bvToast.toast('Coming soon...', {
-    //     title: 'Notice',
-    //     autoHideDelay: 5000,
-    //   });
-    // },
   },
 };
 </script>
